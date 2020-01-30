@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "target": "ES5",
+      "module": "CommonJS",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "strictNullChecks": true,
+      "alwaysStrict": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "strictPropertyInitialization": true
+  }
+}
