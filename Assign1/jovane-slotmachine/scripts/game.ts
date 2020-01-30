@@ -1,3 +1,4 @@
+
 (function () {
   let canvas = document.getElementsByTagName('canvas')[0];
   let stage: createjs.Stage;
@@ -111,6 +112,12 @@
     stage.update();
   }
 
+  /**
+   * 
+   * @param value 
+   * @param lowerBounds 
+   * @param upperBounds 
+   */
   function checkRange(value:number, lowerBounds:number, upperBounds:number) {
     if (value >= lowerBounds && value <= upperBounds)
     {
@@ -121,6 +128,9 @@
     }
   }
 
+  /**
+   * 
+   */
   function Reels(): Array<number> {
     let outCome: Array<number> = [0, 0, 0];
     let betLine:Array<number> = [];
@@ -296,7 +306,7 @@
     resetFruitTally();
     checkJackPot();
     //TODO: change the msg to a label
-    alert('You Won: $' + winnings);
+    console.log('You Won: $' + winnings);
   }
 
   /**
@@ -308,7 +318,7 @@
     let jackPotWin:number = Math.floor(Math.random() * 51 + 1);
     if (jackPotTry == jackPotWin) {
         //TODO: change the msg to a label
-        alert("You Won the $" + jackpot + " Jackpot!!");
+        console.log("You Won the $" + jackpot + " Jackpot!!");
         playerMoney += jackpot;
         jackpot = 1000;
     }
@@ -321,9 +331,12 @@
     playerMoney -= playerBet;
     resetFruitTally();
     //TODO: change the msg to a label
-    alert('You Lost!');
+    console.log('You Lost!');
   }
 
+  /**
+   * 
+   */
   function resetFruitTally():void {
     results.forEach(r => r.total = 0);
 }

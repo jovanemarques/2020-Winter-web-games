@@ -249,13 +249,13 @@
         playerMoney += winnings;
         resetFruitTally();
         checkJackPot();
-        alert('You Won: $' + winnings);
+        console.log('You Won: $' + winnings);
     }
     function checkJackPot() {
         var jackPotTry = Math.floor(Math.random() * 51 + 1);
         var jackPotWin = Math.floor(Math.random() * 51 + 1);
         if (jackPotTry == jackPotWin) {
-            alert("You Won the $" + jackpot + " Jackpot!!");
+            console.log("You Won the $" + jackpot + " Jackpot!!");
             playerMoney += jackpot;
             jackpot = 1000;
         }
@@ -263,7 +263,7 @@
     function showLossMessage() {
         playerMoney -= playerBet;
         resetFruitTally();
-        alert('You Lost!');
+        console.log('You Lost!');
     }
     function resetFruitTally() {
         results.forEach(function (r) { return r.total = 0; });
