@@ -12,6 +12,10 @@
     var jackpot = 5000;
     var winNumber = 0;
     var lossNumber = 0;
+    var theme = 1;
+    var label_winnings;
+    var label_credits;
+    var label_bet;
     var themes = [
         {
             name: 'theme1',
@@ -83,7 +87,6 @@
             }
         }
     ];
-    var theme = 1;
     function Start() {
         console.log("%c Slot Machine Started", "color: green; font-size:15px; font-weight: bold;");
         stage = new createjs.Stage(canvas);
@@ -94,6 +97,9 @@
     }
     function Update() {
         stage.update();
+        label_winnings.text = winNumber.toString();
+        label_credits.text = playerMoney.toString();
+        label_bet.text = playerBet.toString();
     }
     function checkRange(value, lowerBounds, upperBounds) {
         if (value >= lowerBounds && value <= upperBounds) {
@@ -167,6 +173,27 @@
         btn_spin.y = themes[theme].spin.pos.y;
         btn_spin.cursor = "pointer";
         stage.addChild(btn_spin);
+        label_credits = new createjs.Text(playerMoney.toString());
+        label_credits.font = "15px 'Press Start 2P'";
+        label_credits.textAlign = "center";
+        label_credits.x = 149;
+        label_credits.y = 354;
+        label_credits.color = 'red';
+        stage.addChild(label_credits);
+        label_winnings = new createjs.Text("0");
+        label_winnings.font = "15px 'Press Start 2P'";
+        label_winnings.textAlign = "center";
+        label_winnings.x = 537;
+        label_winnings.y = 354;
+        label_winnings.color = 'red';
+        stage.addChild(label_winnings);
+        label_bet = new createjs.Text(playerBet.toString());
+        label_bet.font = "15px 'Press Start 2P'";
+        label_bet.textAlign = "center";
+        label_bet.x = 410;
+        label_bet.y = 354;
+        label_bet.color = 'red';
+        stage.addChild(label_bet);
         btn_spin.on("click", function () {
             var spinResult = Reels();
             stage.removeChild(reel_1);

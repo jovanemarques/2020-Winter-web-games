@@ -13,6 +13,10 @@
   let jackpot: number = 5000;
   let winNumber: number = 0;
   let lossNumber: number = 0;
+  let theme = 1;
+  let label_winnings:createjs.Text;
+  let label_credits:createjs.Text;
+  let label_bet:createjs.Text;
 
   let themes = [
     {
@@ -41,7 +45,7 @@
     },
     {
       name:'theme2',
-      machine:'./assets/images/slot2-640.png',
+      machine:'./assets/images/slot2-640.png', 
       spin:{
         pos:{x:497, y:386},
         image:'./assets/images/spin.png'
@@ -88,7 +92,6 @@
       }
     }
   ];
-  let theme = 1;
   
  
   /**
@@ -110,6 +113,9 @@
    */
   function Update(): void {
     stage.update();
+    label_winnings.text = winNumber.toString();
+    label_credits.text = playerMoney.toString(); 
+    label_bet.text = playerBet.toString(); 
   }
 
   /**
@@ -206,6 +212,30 @@
     btn_spin.y = themes[theme].spin.pos.y;
     btn_spin.cursor = "pointer";
     stage.addChild(btn_spin);
+
+    label_credits = new createjs.Text(playerMoney.toString());
+    label_credits.font = "15px 'Press Start 2P'";
+    label_credits.textAlign = "center";
+    label_credits.x = 149;
+    label_credits.y = 354;
+    label_credits.color = 'red';
+    stage.addChild(label_credits);
+
+    label_winnings = new createjs.Text("0");
+    label_winnings.font = "15px 'Press Start 2P'";
+    label_winnings.textAlign = "center";
+    label_winnings.x = 537; 
+    label_winnings.y = 354;
+    label_winnings.color = 'red';
+    stage.addChild(label_winnings);
+
+    label_bet = new createjs.Text(playerBet.toString());
+    label_bet.font = "15px 'Press Start 2P'";
+    label_bet.textAlign = "center";
+    label_bet.x = 410; 
+    label_bet.y = 354;
+    label_bet.color = 'red';
+    stage.addChild(label_bet);
 
     btn_spin.on("click", function(){
       let spinResult:Array<number> = Reels();
