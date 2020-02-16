@@ -5,6 +5,8 @@
     var reel_1;
     var reel_2;
     var reel_3;
+    var reel_4;
+    var reel_5;
     var results = [];
     var winnings = 0;
     var playerBet = 10;
@@ -16,21 +18,22 @@
     var label_credits;
     var label_bet;
     var reelsVelocity = 30;
-    var spinReels = [false, false, false];
+    var spinReels = [false, false, false, false, false];
     var spinReelsTimeInMilliseconds = 1000;
     var theme = 0;
     var themes = [
         {
-            name: 'theme2',
-            machine: './assets/images/slot2-640.png',
+            name: 'theme-dont-starve',
+            machine1: './assets/images/ds-bg1.png',
+            machine2: './assets/images/ds-bg2.png',
             spin: {
-                pos: { x: 497, y: 386 },
+                pos: { x: 0, y: 0 },
                 image: './assets/images/spin.png'
             },
             reels: {
-                img: './assets/images/reel-all.png',
-                pos_x_reels: [98, 270, 435],
-                pos_y_items: [230, 10, -132, -259, -396, -536, -668, -810, -940]
+                img: './assets/images/ds-reels.png',
+                pos_x_reels: [140, 260, 380, 500, 620],
+                pos_y_items: [185, 85, -20, -145, -245, -335, -435, -535]
             },
         },
     ];
@@ -59,14 +62,26 @@
         if (spinReels[2]) {
             reel_3.y += reelsVelocity;
         }
+        if (spinReels[3]) {
+            reel_4.y += reelsVelocity;
+        }
+        if (spinReels[4]) {
+            reel_5.y += reelsVelocity;
+        }
         if (reel_1.y > themes[theme].reels.pos_y_items[0]) {
-            reel_1.y = themes[theme].reels.pos_y_items[8];
+            reel_1.y = themes[theme].reels.pos_y_items[7];
         }
         if (reel_2.y > themes[theme].reels.pos_y_items[0]) {
-            reel_2.y = themes[theme].reels.pos_y_items[8];
+            reel_2.y = themes[theme].reels.pos_y_items[7];
         }
         if (reel_3.y > themes[theme].reels.pos_y_items[0]) {
-            reel_3.y = themes[theme].reels.pos_y_items[8];
+            reel_3.y = themes[theme].reels.pos_y_items[7];
+        }
+        if (reel_4.y > themes[theme].reels.pos_y_items[0]) {
+            reel_4.y = themes[theme].reels.pos_y_items[7];
+        }
+        if (reel_5.y > themes[theme].reels.pos_y_items[0]) {
+            reel_5.y = themes[theme].reels.pos_y_items[7];
         }
     }
     function checkRange(value, lowerBounds, upperBounds) {
@@ -81,10 +96,10 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     function Reels() {
-        var outCome = [0, 0, 0];
+        var outCome = [0, 0, 0, 0, 0];
         var betLine = [];
         results = themes[theme].reels.pos_y_items.map(function (e) { return 0; });
-        for (var spin = 0; spin < 3; spin++) {
+        for (var spin = 0; spin < 5; spin++) {
             outCome[spin] = generateRandomNumber(1, 65);
             switch (outCome[spin]) {
                 case checkRange(outCome[spin], 1, 27):
@@ -125,20 +140,30 @@
     }
     function Main() {
         console.log("%c Main Started", "color: green; font-size:16px;");
+        var bg_back = new createjs.Bitmap(themes[theme].machine1);
+        stage.addChild(bg_back);
         reel_1 = new createjs.Bitmap(themes[theme].reels.img);
         reel_1.x = themes[theme].reels.pos_x_reels[0];
-        reel_1.y = themes[theme].reels.pos_y_items[0];
+        reel_1.y = themes[theme].reels.pos_y_items[1];
         stage.addChild(reel_1);
         reel_2 = new createjs.Bitmap(themes[theme].reels.img);
         reel_2.x = themes[theme].reels.pos_x_reels[1];
-        reel_2.y = themes[theme].reels.pos_y_items[0];
+        reel_2.y = themes[theme].reels.pos_y_items[1];
         stage.addChild(reel_2);
         reel_3 = new createjs.Bitmap(themes[theme].reels.img);
         reel_3.x = themes[theme].reels.pos_x_reels[2];
-        reel_3.y = themes[theme].reels.pos_y_items[0];
+        reel_3.y = themes[theme].reels.pos_y_items[1];
         stage.addChild(reel_3);
-        var bg = new createjs.Bitmap(themes[theme].machine);
-        stage.addChild(bg);
+        reel_4 = new createjs.Bitmap(themes[theme].reels.img);
+        reel_4.x = themes[theme].reels.pos_x_reels[3];
+        reel_4.y = themes[theme].reels.pos_y_items[1];
+        stage.addChild(reel_4);
+        reel_5 = new createjs.Bitmap(themes[theme].reels.img);
+        reel_5.x = themes[theme].reels.pos_x_reels[4];
+        reel_5.y = themes[theme].reels.pos_y_items[1];
+        stage.addChild(reel_5);
+        var bg_front = new createjs.Bitmap(themes[theme].machine2);
+        stage.addChild(bg_front);
         var btn_spin = new createjs.Bitmap(themes[theme].spin.image);
         btn_spin.x = themes[theme].spin.pos.x;
         btn_spin.y = themes[theme].spin.pos.y;
@@ -147,29 +172,31 @@
         label_credits = new createjs.Text(playerMoney.toString());
         label_credits.font = "15px 'Press Start 2P'";
         label_credits.textAlign = "center";
-        label_credits.x = 149;
+        label_credits.x = 50;
         label_credits.y = 354;
         label_credits.color = 'red';
         stage.addChild(label_credits);
         label_winnings = new createjs.Text("0");
         label_winnings.font = "15px 'Press Start 2P'";
         label_winnings.textAlign = "center";
-        label_winnings.x = 537;
-        label_winnings.y = 354;
+        label_winnings.x = 50;
+        label_winnings.y = 454;
         label_winnings.color = 'red';
         stage.addChild(label_winnings);
         label_bet = new createjs.Text(playerBet.toString());
         label_bet.font = "15px 'Press Start 2P'";
         label_bet.textAlign = "center";
-        label_bet.x = 410;
-        label_bet.y = 354;
+        label_bet.x = 50;
+        label_bet.y = 254;
         label_bet.color = 'red';
         stage.addChild(label_bet);
         btn_spin.on("click", function () {
-            spinReels = [true, true, true];
-            reel_1.y = generateRandomNumber(themes[theme].reels.pos_y_items[8], themes[theme].reels.pos_y_items[0]);
-            reel_2.y = generateRandomNumber(themes[theme].reels.pos_y_items[8], themes[theme].reels.pos_y_items[0]);
-            reel_3.y = generateRandomNumber(themes[theme].reels.pos_y_items[8], themes[theme].reels.pos_y_items[0]);
+            spinReels = [true, true, true, true, true];
+            reel_1.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+            reel_2.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+            reel_3.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+            reel_4.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+            reel_5.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
             var spinResult = Reels();
             sleep(spinReelsTimeInMilliseconds).then(function () {
                 spinReels[0] = false;
@@ -180,7 +207,15 @@
                     sleep(spinReelsTimeInMilliseconds).then(function () {
                         spinReels[2] = false;
                         reel_3.y = themes[theme].reels.pos_y_items[spinResult[2]];
-                        determineWinnings();
+                        sleep(spinReelsTimeInMilliseconds).then(function () {
+                            spinReels[3] = false;
+                            reel_4.y = themes[theme].reels.pos_y_items[spinResult[3]];
+                            sleep(spinReelsTimeInMilliseconds).then(function () {
+                                spinReels[4] = false;
+                                reel_5.y = themes[theme].reels.pos_y_items[spinResult[4]];
+                                determineWinnings();
+                            });
+                        });
                     });
                 });
             });

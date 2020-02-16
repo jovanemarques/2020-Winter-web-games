@@ -1,4 +1,12 @@
-#canvas{
-  border: 1px dotted black;
-  border-radius: 5px;
+#canvas
+{
+    background-color: white;
+    border: 1px dotted black;
+    border-radius: 10px;
+}
+
+#mainContent
+{
+    width: 980px;
+    margin: 0 auto;
 }
