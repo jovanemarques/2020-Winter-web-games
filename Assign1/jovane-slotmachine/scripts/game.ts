@@ -13,36 +13,40 @@
   let jackpot: number = 5000;
   let winNumber: number = 0;
   let lossNumber: number = 0;
-  let theme = 1;
   let label_winnings:createjs.Text;
   let label_credits:createjs.Text;
   let label_bet:createjs.Text;
-
+  let reelsVelocity:number = 30;
+  //let reelsY = { start:-1100, end:200 };
+  let spinReels:boolean[] = [false, false, false];
+  let spinReelsTimeInMilliseconds:number = 1000;
+  
+  let theme = 0;
   let themes = [
-    {
-      name:'theme1',
-      machine:'./assets/images/machine.png',
-      spin:{
-        pos:{x:98, y:145},
-        image:'./assets/images/spin.png'
-      },
-      reels:{
-        pos_reel_1:{x:142.5, y:85},
-        pos_reel_2:{x:267,   y:85},
-        pos_reel_3:{x:388,   y:85},
-        images:[
-          './assets/images/reel-blank.png', 
-          './assets/images/reel-bar.png', 
-          './assets/images/reel-cherry.png', 
-          './assets/images/reel-dollar.png',
-          './assets/images/reel-star.png',
-          //'./assets/images/reel-diamond.png',
-          './assets/images/reel-watermelon.png',
-          './assets/images/reel-lemon.png',
-          './assets/images/reel-7.png',
-        ]
-      }
-    },
+    // {
+    //   name:'theme1',
+    //   machine:'./assets/images/machine.png',
+    //   spin:{
+    //     pos:{x:98, y:145},
+    //     image:'./assets/images/spin.png'
+    //   },
+    //   reels:{
+    //     pos_reel_1:{x:142.5, y:85},
+    //     pos_reel_2:{x:267,   y:85},
+    //     pos_reel_3:{x:388,   y:85},
+    //     images:[
+    //       './assets/images/reel-blank.png', 
+    //       './assets/images/reel-bar.png', 
+    //       './assets/images/reel-cherry.png', 
+    //       './assets/images/reel-dollar.png',
+    //       './assets/images/reel-star.png',
+    //       //'./assets/images/reel-diamond.png',
+    //       './assets/images/reel-watermelon.png',
+    //       './assets/images/reel-lemon.png',
+    //       './assets/images/reel-7.png',
+    //     ]
+    //   }
+    // },
     {
       name:'theme2',
       machine:'./assets/images/slot2-640.png', 
@@ -50,6 +54,14 @@
         pos:{x:497, y:386},
         image:'./assets/images/spin.png'
       },
+      reels2:{
+          img:'./assets/images/reel-all.png',
+          pos_x_reels:[98, 270, 435],
+          pos_y_items:[230, 10, -132, -259, -396, -536, -668, -810, -940]
+        },
+    // blank = 230 | dollar = 10 | star = -132 | diamond = -259
+    // watermelon = -396 | lemon = -536 | cherry = -668 | bar = -810
+    // seven = -940
       reels:{
         pos_reel_1:{x:98, y:145},
         pos_reel_2:{x:270,y:145},
@@ -60,37 +72,37 @@
           './assets/images/reel-cherry.png', 
           './assets/images/reel-dollar.png',
           './assets/images/reel-star.png',
-          //'./assets/images/reel-diamond.png',
+          './assets/images/reel-diamond.png',
           './assets/images/reel-watermelon.png',
           './assets/images/reel-lemon.png',
           './assets/images/reel-7.png',
         ]
       }
     },
-    {
-      name:'theme3',
-      machine:'./assets/images/slot4.png',
-      spin:{
-        pos:{x:98, y:145},
-        image:'./assets/images/spin.png'
-      },
-      reels:{
-        pos_reel_1:{x:142.5, y:85},
-        pos_reel_2:{x:267,   y:85},
-        pos_reel_3:{x:388,   y:85},
-        images:[
-          './assets/images/reel-blank.png', 
-          './assets/images/reel-bar.png', 
-          './assets/images/reel-cherry.png', 
-          './assets/images/reel-dollar.png',
-          './assets/images/reel-star.png',
-          //'./assets/images/reel-diamond.png',
-          './assets/images/reel-watermelon.png',
-          './assets/images/reel-lemon.png',
-          './assets/images/reel-7.png',
-        ]
-      }
-    }
+    // {
+    //   name:'theme3',
+    //   machine:'./assets/images/slot4.png',
+    //   spin:{
+    //     pos:{x:98, y:145},
+    //     image:'./assets/images/spin.png'
+    //   },
+    //   reels:{
+    //     pos_reel_1:{x:142.5, y:85},
+    //     pos_reel_2:{x:267,   y:85},
+    //     pos_reel_3:{x:388,   y:85},
+    //     images:[
+    //       './assets/images/reel-blank.png', 
+    //       './assets/images/reel-bar.png', 
+    //       './assets/images/reel-cherry.png', 
+    //       './assets/images/reel-dollar.png',
+    //       './assets/images/reel-star.png',
+    //       //'./assets/images/reel-diamond.png',
+    //       './assets/images/reel-watermelon.png',
+    //       './assets/images/reel-lemon.png',
+    //       './assets/images/reel-7.png',
+    //     ]
+    //   }
+    // }
   ];
   
  
@@ -107,6 +119,10 @@
     Main();
   }
 
+    function sleep (time:number) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
   /**
    * This function is triggered every frame (16ms)
    * The stage is then erased and redrawn
@@ -116,6 +132,25 @@
     label_winnings.text = winNumber.toString();
     label_credits.text = playerMoney.toString(); 
     label_bet.text = playerBet.toString(); 
+    if (spinReels[0]){
+        reel_1.y += reelsVelocity;;
+    }
+    if (spinReels[1]){
+        reel_2.y += reelsVelocity;;
+    }
+    if (spinReels[2]){
+        reel_3.y += reelsVelocity;;
+    }
+    //check bounds
+    if (reel_1.y > themes[theme].reels2.pos_y_items[0]){
+        reel_1.y = themes[theme].reels2.pos_y_items[8];
+    }
+    if (reel_2.y > themes[theme].reels2.pos_y_items[0]){
+        reel_2.y = themes[theme].reels2.pos_y_items[8];
+    }
+    if (reel_3.y > themes[theme].reels2.pos_y_items[0]){
+        reel_3.y = themes[theme].reels2.pos_y_items[8];
+    }
   }
 
   /**
@@ -134,6 +169,10 @@
     }
   }
 
+  function generateRandomNumber(min:number, max:number):number{
+    return Math.floor((Math.random() * max) + min)
+  }
+
   /**
    * 
    */
@@ -144,7 +183,8 @@
     results = themes[theme].reels.images.map(e => {return {item:e, total:0}});
     //TODO: convert to an array of reels to be easy to enter more reels
     for (let spin:number = 0; spin < 3; spin++) {
-      outCome[spin] = Math.floor((Math.random() * 65) + 1);
+      //outCome[spin] = Math.floor((Math.random() * 65) + 1);
+      outCome[spin] = generateRandomNumber(1, 65);
       switch (outCome[spin]) {
         case checkRange(outCome[spin], 1, 27):  // 41.5% probability
           betLine[spin] = 0//themes[theme].reels.images[0];
@@ -189,19 +229,22 @@
   function Main(): void {
     console.log("%c Main Started", "color: green; font-size:16px;");
     
-    reel_1 = new createjs.Bitmap(themes[theme].reels.images[0]);
-    reel_1.x = themes[theme].reels.pos_reel_1.x;
-    reel_1.y = themes[theme].reels.pos_reel_1.y;
+    //reel_1 = new createjs.Bitmap(themes[theme].reels.images[0]);
+    reel_1 = new createjs.Bitmap(themes[theme].reels2.img);
+    reel_1.x = themes[theme].reels2.pos_x_reels[0];
+    //reel_1.y = themes[theme].reels.pos_reel_1.y;
+    reel_1.y = themes[theme].reels2.pos_y_items[0];
+    //reel_1.y = -940;
     stage.addChild(reel_1);
 
-    reel_2 = new createjs.Bitmap(themes[theme].reels.images[1]);
-    reel_2.x = themes[theme].reels.pos_reel_2.x;
-    reel_2.y = themes[theme].reels.pos_reel_2.y;
+    reel_2 = new createjs.Bitmap(themes[theme].reels2.img);
+    reel_2.x = themes[theme].reels2.pos_x_reels[1];
+    reel_2.y = themes[theme].reels2.pos_y_items[0];
     stage.addChild(reel_2);
 
-    reel_3 = new createjs.Bitmap(themes[theme].reels.images[3]);
-    reel_3.x = themes[theme].reels.pos_reel_3.x;
-    reel_3.y = themes[theme].reels.pos_reel_3.y;
+    reel_3 = new createjs.Bitmap(themes[theme].reels2.img);
+    reel_3.x = themes[theme].reels2.pos_x_reels[2];
+    reel_3.y = themes[theme].reels2.pos_y_items[0];
     stage.addChild(reel_3);
     
     let bg = new createjs.Bitmap(themes[theme].machine);
@@ -238,29 +281,42 @@
     stage.addChild(label_bet);
 
     btn_spin.on("click", function(){
-      let spinResult:Array<number> = Reels();
-      //TODO: change to allow multi reels and reduce repetition
-      stage.removeChild(reel_1);
-      reel_1 = new createjs.Bitmap(themes[theme].reels.images[spinResult[0]]);
-      reel_1.x = themes[theme].reels.pos_reel_1.x;
-      reel_1.y = themes[theme].reels.pos_reel_1.y;
-      stage.addChild(reel_1);
-
-      stage.removeChild(reel_2);
-      reel_2 = new createjs.Bitmap(themes[theme].reels.images[spinResult[1]]);
-      reel_2.x = themes[theme].reels.pos_reel_2.x;
-      reel_2.y = themes[theme].reels.pos_reel_2.y;
-      stage.addChild(reel_2);
-
-      stage.removeChild(reel_3);
-      reel_3 = new createjs.Bitmap(themes[theme].reels.images[spinResult[2]]);
-      reel_3.x = themes[theme].reels.pos_reel_3.x;
-      reel_3.y = themes[theme].reels.pos_reel_3.y;
-      stage.addChild(reel_3);
-
-      determineWinnings();
+        spinReels = [true, true, true];
+        reel_1.y = generateRandomNumber(themes[theme].reels2.pos_y_items[8], themes[theme].reels2.pos_y_items[0]);
+        reel_2.y = generateRandomNumber(themes[theme].reels2.pos_y_items[8], themes[theme].reels2.pos_y_items[0]);
+        reel_3.y = generateRandomNumber(themes[theme].reels2.pos_y_items[8], themes[theme].reels2.pos_y_items[0]);
+        //stage.removeChild(reel_1);
+        // reel_1 = new createjs.Bitmap(themes[theme].reels2.img);
+        // reel_1.y = reelsY.start;
+        // reel_1.x = themes[theme].reels.pos_reel_1.x;
+        //stage.addChild(reel_1);
+        let spinResult:Array<number> = Reels();
+        sleep(spinReelsTimeInMilliseconds).then(() => {
+            spinReels[0] = false;
+            reel_1.y = themes[theme].reels2.pos_y_items[spinResult[0]];
+            sleep(spinReelsTimeInMilliseconds).then(() => {
+                spinReels[1] = false;
+                reel_2.y = themes[theme].reels2.pos_y_items[spinResult[1]];
+                sleep(spinReelsTimeInMilliseconds).then(() => {
+                    spinReels[2] = false;
+                    reel_3.y = themes[theme].reels2.pos_y_items[spinResult[2]];
+                    determineWinnings();
+                });
+            });
+        });
     });
   }
+
+//   function spinReels(){
+    
+
+//     // stage.removeChild(reel_1);
+//     // reel_1 = new createjs.Bitmap(themes[theme].reels2.img);
+//     // // reel_1.x = themes[theme].reels.pos_reel_1.x;
+//     // // reel_1.y = themes[theme].reels.pos_reel_1.y;
+//     // stage.addChild(reel_1);
+   
+//   }
 
   /**
    * This function calculates the player's winnings, if any
@@ -344,8 +400,10 @@
    */
   function checkJackPot() {
     /* compare two random values */
-    let jackPotTry:number = Math.floor(Math.random() * 51 + 1);
-    let jackPotWin:number = Math.floor(Math.random() * 51 + 1);
+    //let jackPotTry:number = Math.floor(Math.random() * 51 + 1);
+    let jackPotTry:number = generateRandomNumber(1, 51);
+    //let jackPotWin:number = Math.floor(Math.random() * 51 + 1);
+    let jackPotWin:number = generateRandomNumber(1, 51);
     if (jackPotTry == jackPotWin) {
         //TODO: change the msg to a label
         console.log("You Won the $" + jackpot + " Jackpot!!");

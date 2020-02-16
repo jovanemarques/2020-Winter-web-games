@@ -10,6 +10,7 @@
       "alwaysStrict": true,
       "noImplicitReturns": true,
       "noImplicitThis": true,
-      "strictPropertyInitialization": true
+      "strictPropertyInitialization": true,
+      "lib": ["es5", "es2015", "dom", "scripthost"]
   }
 }
