@@ -9,17 +9,22 @@
     var reel_5;
     var results = [];
     var winnings = 0;
-    var playerBet = 10;
+    var playerBet = 100;
     var playerMoney = 1000;
     var jackpot = 5000;
     var winNumber = 0;
     var lossNumber = 0;
     var label_winnings;
+    var label_jackpot;
     var label_credits;
     var label_bet;
     var reelsVelocity = 30;
     var spinReels = [false, false, false, false, false];
-    var spinReelsTimeInMilliseconds = 1000;
+    var spinReelsTimeInMilliseconds = 500;
+    var btn_spin;
+    var btn_bet_add10;
+    var btn_bet_subtract10;
+    var btn_reset;
     var theme = 0;
     var themes = [
         {
@@ -27,13 +32,27 @@
             machine1: './assets/images/ds-bg1.png',
             machine2: './assets/images/ds-bg2.png',
             spin: {
-                pos: { x: 0, y: 0 },
-                image: './assets/images/spin.png'
+                pos: { x: 600, y: 520 },
+                image: './assets/images/ds-spin-on.png',
+            },
+            bet: {
+                add_10: {
+                    pos: { x: 10, y: 520 },
+                    image: './assets/images/ds-bet-add10.png'
+                },
+                subtract_10: {
+                    pos: { x: 205, y: 520 },
+                    image: './assets/images/ds-bet-subtract10.png'
+                },
+            },
+            reset: {
+                pos: { x: 405, y: 520 },
+                image: './assets/images/ds-reset.png'
             },
             reels: {
                 img: './assets/images/ds-reels.png',
                 pos_x_reels: [140, 260, 380, 500, 620],
-                pos_y_items: [185, 85, -20, -145, -245, -335, -435, -535]
+                pos_y_items: [185, 85, -20, -130, -235, -335, -435, -535]
             },
         },
     ];
@@ -50,9 +69,10 @@
     }
     function Update() {
         stage.update();
-        label_winnings.text = winNumber.toString();
-        label_credits.text = playerMoney.toString();
-        label_bet.text = playerBet.toString();
+        label_winnings.text = 'Wins : ' + winNumber.toString();
+        label_jackpot.text = 'Jackpot : $' + jackpot.toString();
+        label_credits.text = 'Money : $' + playerMoney.toString();
+        label_bet.text = 'Bet : $' + playerBet.toString();
         if (spinReels[0]) {
             reel_1.y += reelsVelocity;
         }
@@ -140,6 +160,19 @@
     }
     function Main() {
         console.log("%c Main Started", "color: green; font-size:16px;");
+        if (!createjs.Sound.initializeDefaultPlugins()) {
+            console.log('cannot play sound in this browser');
+            return;
+        }
+        var audioPath = "./assets/sounds/";
+        var sounds = [
+            { id: "Music", src: "Dont Starve OST - Dont Starve Theme.mp3" },
+        ];
+        createjs.Sound.alternateExtensions = ["mp3"];
+        createjs.Sound.addEventListener("fileload", function (event) {
+            createjs.Sound.play(event.src);
+        });
+        createjs.Sound.registerSounds(sounds, audioPath);
         var bg_back = new createjs.Bitmap(themes[theme].machine1);
         stage.addChild(bg_back);
         reel_1 = new createjs.Bitmap(themes[theme].reels.img);
@@ -164,66 +197,128 @@
         stage.addChild(reel_5);
         var bg_front = new createjs.Bitmap(themes[theme].machine2);
         stage.addChild(bg_front);
-        var btn_spin = new createjs.Bitmap(themes[theme].spin.image);
-        btn_spin.x = themes[theme].spin.pos.x;
-        btn_spin.y = themes[theme].spin.pos.y;
-        btn_spin.cursor = "pointer";
+        btn_spin = new objects.Button(themes[theme].spin.image, themes[theme].spin.pos.x, themes[theme].spin.pos.y, false);
         stage.addChild(btn_spin);
-        label_credits = new createjs.Text(playerMoney.toString());
-        label_credits.font = "15px 'Press Start 2P'";
-        label_credits.textAlign = "center";
-        label_credits.x = 50;
-        label_credits.y = 354;
-        label_credits.color = 'red';
+        btn_bet_add10 = new objects.Button(themes[theme].bet.add_10.image, themes[theme].bet.add_10.pos.x, themes[theme].bet.add_10.pos.y, false);
+        stage.addChild(btn_bet_add10);
+        btn_bet_add10.on("click", function () {
+            playerBet += 10;
+        });
+        btn_bet_subtract10 = new objects.Button(themes[theme].bet.subtract_10.image, themes[theme].bet.subtract_10.pos.x, themes[theme].bet.subtract_10.pos.y, false);
+        stage.addChild(btn_bet_subtract10);
+        btn_bet_subtract10.on("click", function () {
+            playerBet -= 10;
+        });
+        btn_reset = new objects.Button(themes[theme].reset.image, themes[theme].reset.pos.x, themes[theme].reset.pos.y, false);
+        stage.addChild(btn_reset);
+        btn_reset.on("click", function () {
+            winnings = 0;
+            playerBet = 100;
+            playerMoney = 1000;
+            jackpot = 5000;
+            winNumber = 0;
+            lossNumber = 0;
+            reel_1.y = themes[theme].reels.pos_y_items[1];
+            reel_2.y = themes[theme].reels.pos_y_items[1];
+            reel_3.y = themes[theme].reels.pos_y_items[1];
+            reel_4.y = themes[theme].reels.pos_y_items[1];
+            reel_5.y = themes[theme].reels.pos_y_items[1];
+        });
+        label_credits = new objects.Label(playerMoney.toString(), void 0, void 0, void 0, 20, 20, false);
         stage.addChild(label_credits);
-        label_winnings = new createjs.Text("0");
-        label_winnings.font = "15px 'Press Start 2P'";
-        label_winnings.textAlign = "center";
-        label_winnings.x = 50;
-        label_winnings.y = 454;
-        label_winnings.color = 'red';
+        label_winnings = new objects.Label(playerMoney.toString(), void 0, void 0, void 0, 20, 60, false);
         stage.addChild(label_winnings);
-        label_bet = new createjs.Text(playerBet.toString());
-        label_bet.font = "15px 'Press Start 2P'";
-        label_bet.textAlign = "center";
-        label_bet.x = 50;
-        label_bet.y = 254;
-        label_bet.color = 'red';
+        label_jackpot = new objects.Label(playerMoney.toString(), void 0, void 0, void 0, 20, 100, false);
+        stage.addChild(label_jackpot);
+        label_bet = new objects.Label(playerMoney.toString(), void 0, void 0, void 0, 20, 150, false);
         stage.addChild(label_bet);
         btn_spin.on("click", function () {
-            spinReels = [true, true, true, true, true];
-            reel_1.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
-            reel_2.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
-            reel_3.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
-            reel_4.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
-            reel_5.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
-            var spinResult = Reels();
-            sleep(spinReelsTimeInMilliseconds).then(function () {
-                spinReels[0] = false;
-                reel_1.y = themes[theme].reels.pos_y_items[spinResult[0]];
-                sleep(spinReelsTimeInMilliseconds).then(function () {
-                    spinReels[1] = false;
-                    reel_2.y = themes[theme].reels.pos_y_items[spinResult[1]];
+            createjs.WebAudioPlugin.context.resume();
+            if (playerMoney > playerBet) {
+                if (!spinReels[0] && !spinReels[1] && !spinReels[2] && !spinReels[3] && !spinReels[4]) {
+                    spinReels = [true, true, true, true, true];
+                    reel_1.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+                    reel_2.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+                    reel_3.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+                    reel_4.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+                    reel_5.y = generateRandomNumber(themes[theme].reels.pos_y_items[7], themes[theme].reels.pos_y_items[0]);
+                    var spinResult_1 = Reels();
                     sleep(spinReelsTimeInMilliseconds).then(function () {
-                        spinReels[2] = false;
-                        reel_3.y = themes[theme].reels.pos_y_items[spinResult[2]];
+                        spinReels[0] = false;
+                        reel_1.y = themes[theme].reels.pos_y_items[spinResult_1[0]];
                         sleep(spinReelsTimeInMilliseconds).then(function () {
-                            spinReels[3] = false;
-                            reel_4.y = themes[theme].reels.pos_y_items[spinResult[3]];
+                            spinReels[1] = false;
+                            reel_2.y = themes[theme].reels.pos_y_items[spinResult_1[1]];
                             sleep(spinReelsTimeInMilliseconds).then(function () {
-                                spinReels[4] = false;
-                                reel_5.y = themes[theme].reels.pos_y_items[spinResult[4]];
-                                determineWinnings();
+                                spinReels[2] = false;
+                                reel_3.y = themes[theme].reels.pos_y_items[spinResult_1[2]];
+                                sleep(spinReelsTimeInMilliseconds).then(function () {
+                                    spinReels[3] = false;
+                                    reel_4.y = themes[theme].reels.pos_y_items[spinResult_1[3]];
+                                    sleep(spinReelsTimeInMilliseconds).then(function () {
+                                        spinReels[4] = false;
+                                        reel_5.y = themes[theme].reels.pos_y_items[spinResult_1[4]];
+                                        determineWinnings();
+                                    });
+                                });
                             });
                         });
                     });
-                });
-            });
+                }
+                else {
+                    console.log('The reels are running already.');
+                }
+            }
+            else {
+                console.log('Player do not have money to play.');
+            }
         });
     }
     function determineWinnings() {
-        if (results[0] === 0) {
-            if (results[1] === 3) {
+        if (results[0] < 2) {
+            if (results[1] === 5) {
+                winnings = playerBet * 210;
+            }
+            else if (results[2] === 5) {
+                winnings = playerBet * 220;
+            }
+            else if (results[3] === 5) {
+                winnings = playerBet * 230;
+            }
+            else if (results[4] === 5) {
+                winnings = playerBet * 240;
+            }
+            else if (results[5] === 5) {
+                winnings = playerBet * 250;
+            }
+            else if (results[6] === 5) {
+                winnings = playerBet * 375;
+            }
+            else if (results[7] === 5) {
+                winnings = playerBet * 500;
+            }
+            else if (results[1] === 4) {
+                winnings = playerBet * 110;
+            }
+            else if (results[2] === 4) {
+                winnings = playerBet * 120;
+            }
+            else if (results[3] === 4) {
+                winnings = playerBet * 130;
+            }
+            else if (results[4] === 4) {
+                winnings = playerBet * 140;
+            }
+            else if (results[5] === 4) {
+                winnings = playerBet * 150;
+            }
+            else if (results[6] === 4) {
+                winnings = playerBet * 175;
+            }
+            else if (results[7] === 4) {
+                winnings = playerBet * 200;
+            }
+            else if (results[1] === 3) {
                 winnings = playerBet * 10;
             }
             else if (results[2] === 3) {

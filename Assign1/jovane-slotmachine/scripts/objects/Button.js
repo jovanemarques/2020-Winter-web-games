@@ -18,6 +18,7 @@ var objects;
         __extends(Button, _super);
         function Button(imagePath, x, y, isCentered) {
             var _this = _super.call(this, imagePath) || this;
+            _this.cursor = "pointer";
             if (isCentered) {
                 _this.regX = 75;
                 _this.regY = 250;
