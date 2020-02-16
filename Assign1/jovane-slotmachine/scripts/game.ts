@@ -2,11 +2,10 @@
 (function () {
   let canvas = document.getElementsByTagName('canvas')[0];
   let stage: createjs.Stage;
-  //TODO: remove hard coded reel number
   let reel_1: createjs.Bitmap;
   let reel_2: createjs.Bitmap;
   let reel_3: createjs.Bitmap;
-  let results: { item: string; total: number; }[] = [];
+  let results:number[] = [];
   let winnings: number = 0;
   let playerBet: number = 10;
   let playerMoney: number = 1000;
@@ -17,36 +16,11 @@
   let label_credits:createjs.Text;
   let label_bet:createjs.Text;
   let reelsVelocity:number = 30;
-  //let reelsY = { start:-1100, end:200 };
   let spinReels:boolean[] = [false, false, false];
   let spinReelsTimeInMilliseconds:number = 1000;
   
   let theme = 0;
   let themes = [
-    // {
-    //   name:'theme1',
-    //   machine:'./assets/images/machine.png',
-    //   spin:{
-    //     pos:{x:98, y:145},
-    //     image:'./assets/images/spin.png'
-    //   },
-    //   reels:{
-    //     pos_reel_1:{x:142.5, y:85},
-    //     pos_reel_2:{x:267,   y:85},
-    //     pos_reel_3:{x:388,   y:85},
-    //     images:[
-    //       './assets/images/reel-blank.png', 
-    //       './assets/images/reel-bar.png', 
-    //       './assets/images/reel-cherry.png', 
-    //       './assets/images/reel-dollar.png',
-    //       './assets/images/reel-star.png',
-    //       //'./assets/images/reel-diamond.png',
-    //       './assets/images/reel-watermelon.png',
-    //       './assets/images/reel-lemon.png',
-    //       './assets/images/reel-7.png',
-    //     ]
-    //   }
-    // },
     {
       name:'theme2',
       machine:'./assets/images/slot2-640.png', 
@@ -54,7 +28,7 @@
         pos:{x:497, y:386},
         image:'./assets/images/spin.png'
       },
-      reels2:{
+      reels:{
           img:'./assets/images/reel-all.png',
           pos_x_reels:[98, 270, 435],
           pos_y_items:[230, 10, -132, -259, -396, -536, -668, -810, -940]
@@ -62,47 +36,7 @@
     // blank = 230 | dollar = 10 | star = -132 | diamond = -259
     // watermelon = -396 | lemon = -536 | cherry = -668 | bar = -810
     // seven = -940
-      reels:{
-        pos_reel_1:{x:98, y:145},
-        pos_reel_2:{x:270,y:145},
-        pos_reel_3:{x:435,y:145},
-        images:[
-          './assets/images/reel-blank.png', 
-          './assets/images/reel-bar.png', 
-          './assets/images/reel-cherry.png', 
-          './assets/images/reel-dollar.png',
-          './assets/images/reel-star.png',
-          './assets/images/reel-diamond.png',
-          './assets/images/reel-watermelon.png',
-          './assets/images/reel-lemon.png',
-          './assets/images/reel-7.png',
-        ]
-      }
     },
-    // {
-    //   name:'theme3',
-    //   machine:'./assets/images/slot4.png',
-    //   spin:{
-    //     pos:{x:98, y:145},
-    //     image:'./assets/images/spin.png'
-    //   },
-    //   reels:{
-    //     pos_reel_1:{x:142.5, y:85},
-    //     pos_reel_2:{x:267,   y:85},
-    //     pos_reel_3:{x:388,   y:85},
-    //     images:[
-    //       './assets/images/reel-blank.png', 
-    //       './assets/images/reel-bar.png', 
-    //       './assets/images/reel-cherry.png', 
-    //       './assets/images/reel-dollar.png',
-    //       './assets/images/reel-star.png',
-    //       //'./assets/images/reel-diamond.png',
-    //       './assets/images/reel-watermelon.png',
-    //       './assets/images/reel-lemon.png',
-    //       './assets/images/reel-7.png',
-    //     ]
-    //   }
-    // }
   ];
   
  
@@ -132,28 +66,30 @@
     label_winnings.text = winNumber.toString();
     label_credits.text = playerMoney.toString(); 
     label_bet.text = playerBet.toString(); 
+    // check if reels need to move 
     if (spinReels[0]){
-        reel_1.y += reelsVelocity;;
+        reel_1.y += reelsVelocity;
     }
     if (spinReels[1]){
-        reel_2.y += reelsVelocity;;
+        reel_2.y += reelsVelocity;
     }
     if (spinReels[2]){
-        reel_3.y += reelsVelocity;;
+        reel_3.y += reelsVelocity;
     }
-    //check bounds
-    if (reel_1.y > themes[theme].reels2.pos_y_items[0]){
-        reel_1.y = themes[theme].reels2.pos_y_items[8];
+    //check if reels hit the end and reset it
+    if (reel_1.y > themes[theme].reels.pos_y_items[0]){
+        reel_1.y = themes[theme].reels.pos_y_items[8];
     }
-    if (reel_2.y > themes[theme].reels2.pos_y_items[0]){
-        reel_2.y = themes[theme].reels2.pos_y_items[8];
+    if (reel_2.y > themes[theme].reels.pos_y_items[0]){
+        reel_2.y = themes[theme].reels.pos_y_items[8];
     }
-    if (reel_3.y > themes[theme].reels2.pos_y_items[0]){
-        reel_3.y = themes[theme].reels2.pos_y_items[8];
+    if (reel_3.y > themes[theme].reels.pos_y_items[0]){
+        reel_3.y = themes[theme].reels.pos_y_items[8];
     }
   }
 
   /**
+   * It checks if a number is in a range
    * 
    * @param value 
    * @param lowerBounds 
@@ -169,54 +105,63 @@
     }
   }
 
+  /**
+   * Generates random numbers from min to max
+   *
+   * @param {number} min
+   * @param {number} max
+   * @returns {number}
+   */
   function generateRandomNumber(min:number, max:number):number{
-    return Math.floor((Math.random() * max) + min)
+    //return Math.floor((Math.random() * max) + min);
+    // new random calc to deal with negatives
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   /**
-   * 
+   * Calculate the Reels' spin
+   *
+   * @returns {Array<number>}
    */
   function Reels(): Array<number> {
     let outCome: Array<number> = [0, 0, 0];
     let betLine:Array<number> = [];
-    //TODO: check if it right to use objects like this in typescript
-    results = themes[theme].reels.images.map(e => {return {item:e, total:0}});
-    //TODO: convert to an array of reels to be easy to enter more reels
+    //results = themes[theme].reels2.pos_y_items.map(e => {return {item:e, total:0}});
+    results = themes[theme].reels.pos_y_items.map(e => {return 0});
     for (let spin:number = 0; spin < 3; spin++) {
-      //outCome[spin] = Math.floor((Math.random() * 65) + 1);
       outCome[spin] = generateRandomNumber(1, 65);
       switch (outCome[spin]) {
         case checkRange(outCome[spin], 1, 27):  // 41.5% probability
-          betLine[spin] = 0//themes[theme].reels.images[0];
-          results[0].total++;
+          betLine[spin] = 0
+          results[0]++;
           break;
         case checkRange(outCome[spin], 28, 37): // 15.4% probability
           betLine[spin] = 1;
-          results[1].total++;
+          results[1]++;
           break;
         case checkRange(outCome[spin], 38, 46): // 13.8% probability
           betLine[spin] = 2;
-          results[2].total++;
+          results[2]++;
           break;
         case checkRange(outCome[spin], 47, 54): // 12.3% probability
             betLine[spin] = 3;
-            results[3].total++;
+            results[3]++;
             break;
         case checkRange(outCome[spin], 55, 59): //  7.7% probability
             betLine[spin] = 4;
-            results[4].total++;
+            results[4]++;
             break;
         case checkRange(outCome[spin], 60, 62): //  4.6% probability
             betLine[spin] = 5;
-            results[5].total++;
+            results[5]++;
             break;
         case checkRange(outCome[spin], 63, 64): //  3.1% probability
             betLine[spin] = 6;
-            results[6].total++;
+            results[6]++;
             break;
         case checkRange(outCome[spin], 65, 65): //  1.5% probability
             betLine[spin] = 7;
-            results[7].total++;
+            results[7]++;
             break;
       }
     }
@@ -229,22 +174,20 @@
   function Main(): void {
     console.log("%c Main Started", "color: green; font-size:16px;");
     
-    //reel_1 = new createjs.Bitmap(themes[theme].reels.images[0]);
-    reel_1 = new createjs.Bitmap(themes[theme].reels2.img);
-    reel_1.x = themes[theme].reels2.pos_x_reels[0];
-    //reel_1.y = themes[theme].reels.pos_reel_1.y;
-    reel_1.y = themes[theme].reels2.pos_y_items[0];
+    reel_1 = new createjs.Bitmap(themes[theme].reels.img);
+    reel_1.x = themes[theme].reels.pos_x_reels[0];
+    reel_1.y = themes[theme].reels.pos_y_items[0];
     //reel_1.y = -940;
     stage.addChild(reel_1);
 
-    reel_2 = new createjs.Bitmap(themes[theme].reels2.img);
-    reel_2.x = themes[theme].reels2.pos_x_reels[1];
-    reel_2.y = themes[theme].reels2.pos_y_items[0];
+    reel_2 = new createjs.Bitmap(themes[theme].reels.img);
+    reel_2.x = themes[theme].reels.pos_x_reels[1];
+    reel_2.y = themes[theme].reels.pos_y_items[0];
     stage.addChild(reel_2);
 
-    reel_3 = new createjs.Bitmap(themes[theme].reels2.img);
-    reel_3.x = themes[theme].reels2.pos_x_reels[2];
-    reel_3.y = themes[theme].reels2.pos_y_items[0];
+    reel_3 = new createjs.Bitmap(themes[theme].reels.img);
+    reel_3.x = themes[theme].reels.pos_x_reels[2];
+    reel_3.y = themes[theme].reels.pos_y_items[0];
     stage.addChild(reel_3);
     
     let bg = new createjs.Bitmap(themes[theme].machine);
@@ -282,24 +225,21 @@
 
     btn_spin.on("click", function(){
         spinReels = [true, true, true];
-        reel_1.y = generateRandomNumber(themes[theme].reels2.pos_y_items[8], themes[theme].reels2.pos_y_items[0]);
-        reel_2.y = generateRandomNumber(themes[theme].reels2.pos_y_items[8], themes[theme].reels2.pos_y_items[0]);
-        reel_3.y = generateRandomNumber(themes[theme].reels2.pos_y_items[8], themes[theme].reels2.pos_y_items[0]);
-        //stage.removeChild(reel_1);
-        // reel_1 = new createjs.Bitmap(themes[theme].reels2.img);
-        // reel_1.y = reelsY.start;
-        // reel_1.x = themes[theme].reels.pos_reel_1.x;
-        //stage.addChild(reel_1);
+        // positioning the reels in random places to be async
+        reel_1.y = generateRandomNumber(themes[theme].reels.pos_y_items[8], themes[theme].reels.pos_y_items[0]);
+        reel_2.y = generateRandomNumber(themes[theme].reels.pos_y_items[8], themes[theme].reels.pos_y_items[0]);
+        reel_3.y = generateRandomNumber(themes[theme].reels.pos_y_items[8], themes[theme].reels.pos_y_items[0]);
         let spinResult:Array<number> = Reels();
+        //the reels stops one by one
         sleep(spinReelsTimeInMilliseconds).then(() => {
             spinReels[0] = false;
-            reel_1.y = themes[theme].reels2.pos_y_items[spinResult[0]];
+            reel_1.y = themes[theme].reels.pos_y_items[spinResult[0]];
             sleep(spinReelsTimeInMilliseconds).then(() => {
                 spinReels[1] = false;
-                reel_2.y = themes[theme].reels2.pos_y_items[spinResult[1]];
+                reel_2.y = themes[theme].reels.pos_y_items[spinResult[1]];
                 sleep(spinReelsTimeInMilliseconds).then(() => {
                     spinReels[2] = false;
-                    reel_3.y = themes[theme].reels2.pos_y_items[spinResult[2]];
+                    reel_3.y = themes[theme].reels.pos_y_items[spinResult[2]];
                     determineWinnings();
                 });
             });
@@ -307,67 +247,56 @@
     });
   }
 
-//   function spinReels(){
-    
-
-//     // stage.removeChild(reel_1);
-//     // reel_1 = new createjs.Bitmap(themes[theme].reels2.img);
-//     // // reel_1.x = themes[theme].reels.pos_reel_1.x;
-//     // // reel_1.y = themes[theme].reels.pos_reel_1.y;
-//     // stage.addChild(reel_1);
-   
-//   }
-
   /**
    * This function calculates the player's winnings, if any
    */ 
   function determineWinnings():void
   {
-    if (results[0].total === 0)
+    if (results[0] === 0)
     {
-        if (results[1].total === 3){ 
+        if (results[1] === 3){ 
           winnings = playerBet * 10;
         }
-        else if (results[2].total === 3){
+        else if (results[2] === 3){
             winnings = playerBet * 20;
         }
-        else if (results[3].total === 3){
+        else if (results[3] === 3){
             winnings = playerBet * 30;
         }
-        else if (results[4].total === 3){
+        else if (results[4] === 3){
             winnings = playerBet * 40;
         }
-        else if (results[5].total === 3){
+        else if (results[5] === 3){
             winnings = playerBet * 50;
         }
-        else if (results[6].total === 3){
+        else if (results[6] === 3){
             winnings = playerBet * 75;
         }
-        else if (results[7].total === 3){
+        else if (results[7] === 3){
             winnings = playerBet * 100;
         }
-        else if (results[1].total === 2){
+        else if (results[1] === 2){
             winnings = playerBet * 2;
         }
-        else if (results[2].total === 2){
+        else if (results[2] === 2){
             winnings = playerBet * 2;
         }
-        else if (results[3].total === 2){
+        else if (results[3] === 2){
             winnings = playerBet * 3;
         }
-        else if (results[4].total === 2){
+        else if (results[4] === 2){
             winnings = playerBet * 4;
         }
-        else if (results[5].total === 2){
+        else if (results[5] === 2){
             winnings = playerBet * 5;
         }
-        else if (results[6].total === 2){
+        else if (results[6] === 2){
             winnings = playerBet * 10;
         }
-        else if (results[7].total === 2){
+        else if (results[7] === 2){
             winnings = playerBet * 20;
         }
-        else if (results[7].total === 1){
+        else if (results[7] === 1){
             winnings = playerBet * 5;
         }
         else {
@@ -400,9 +329,7 @@
    */
   function checkJackPot() {
     /* compare two random values */
-    //let jackPotTry:number = Math.floor(Math.random() * 51 + 1);
     let jackPotTry:number = generateRandomNumber(1, 51);
-    //let jackPotWin:number = Math.floor(Math.random() * 51 + 1);
     let jackPotWin:number = generateRandomNumber(1, 51);
     if (jackPotTry == jackPotWin) {
         //TODO: change the msg to a label
@@ -426,7 +353,7 @@
    * 
    */
   function resetFruitTally():void {
-    results.forEach(r => r.total = 0);
+    results.forEach(r => r = 0);
 }
 
   window.addEventListener("load", Start);
