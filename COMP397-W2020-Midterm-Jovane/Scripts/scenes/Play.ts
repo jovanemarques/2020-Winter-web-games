@@ -9,6 +9,7 @@ module scenes
     export class Play extends objects.Scene
     {
         // PRIVATE INSTANCE MEMBERS
+        private _diceTable:createjs.Bitmap;
         private _dice1:objects.Button;
         private _dice1Label:objects.Label;
         private _dice2:objects.Button;
@@ -59,28 +60,31 @@ module scenes
          */
         public Start(): void 
         {
+            this._diceTable = new createjs.Bitmap(config.Game.ASSETS.getResult("diceTable"));
             this._dice1 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 100, 150);
-            this._dice1Label = new objects.Label("0", "30px", void 0, void 0, 200, 360);
+            this._dice1Label = new objects.Label("0", "30px", void 0, "#FFFFFF", 200, 360);
             this._dice2 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 350, 150);
-            this._dice2Label = new objects.Label("0", "30px", void 0, void 0, 450, 360);
+            this._dice2Label = new objects.Label("0", "30px", void 0, "#FFFFFF", 450, 360);
             this._rollBtn = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 250, 400);
             this._rollBtn.on('click', (e) => {
-                this._moveDices = true;
-                this.sleep(1000).then(() => {
-                    this._dice1Number = Math.floor(util.Mathf.RandomRange(1, 6));
-                    this._dice1.image = this._diceArray[this._dice1Number] as any;
-                    this._dice1Label.text = this._dice1Number.toString();
-                    console.log(this._dice1Number);
+                if (!this._moveDices){
+                    // move dices on
+                    this._moveDices = true;
+                    this.sleep(1000).then(() => {
+                        this._dice1Number = Math.floor(util.Mathf.RandomRange(1, 6));
+                        this._dice1.image = this._diceArray[this._dice1Number] as any;
+                        this._dice1Label.text = this._dice1Number.toString();
+                        console.log(this._dice1Number);
 
-                    this._dice2Number = Math.floor(util.Mathf.RandomRange(1, 6));
-                    this._dice2.image = this._diceArray[this._dice2Number] as any;
-                    this._dice2Label.text = this._dice2Number.toString();
-                    console.log(this._dice2Number);
+                        this._dice2Number = Math.floor(util.Mathf.RandomRange(1, 6));
+                        this._dice2.image = this._diceArray[this._dice2Number] as any;
+                        this._dice2Label.text = this._dice2Number.toString();
+                        console.log(this._dice2Number);
 
-                    // move dices off
-                    this._moveDices = false;
-                });
-                
+                        // move dices off
+                        this._moveDices = false;
+                    });
+                }
             });
             this.Main();
         }        
@@ -106,6 +110,7 @@ module scenes
          */
         public Main(): void 
         {
+            this.addChild(this._diceTable);
             this.addChild(this._dice1);
             this.addChild(this._dice1Label);
             this.addChild(this._dice2);

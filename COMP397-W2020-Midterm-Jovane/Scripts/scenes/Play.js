@@ -59,25 +59,29 @@ var scenes;
          */
         Play.prototype.Start = function () {
             var _this = this;
+            this._diceTable = new createjs.Bitmap(config.Game.ASSETS.getResult("diceTable"));
             this._dice1 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 100, 150);
-            this._dice1Label = new objects.Label("0", "30px", void 0, void 0, 200, 360);
+            this._dice1Label = new objects.Label("0", "30px", void 0, "#FFFFFF", 200, 360);
             this._dice2 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 350, 150);
-            this._dice2Label = new objects.Label("0", "30px", void 0, void 0, 450, 360);
+            this._dice2Label = new objects.Label("0", "30px", void 0, "#FFFFFF", 450, 360);
             this._rollBtn = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 250, 400);
             this._rollBtn.on('click', function (e) {
-                _this._moveDices = true;
-                _this.sleep(1000).then(function () {
-                    _this._dice1Number = Math.floor(util.Mathf.RandomRange(1, 6));
-                    _this._dice1.image = _this._diceArray[_this._dice1Number];
-                    _this._dice1Label.text = _this._dice1Number.toString();
-                    console.log(_this._dice1Number);
-                    _this._dice2Number = Math.floor(util.Mathf.RandomRange(1, 6));
-                    _this._dice2.image = _this._diceArray[_this._dice2Number];
-                    _this._dice2Label.text = _this._dice2Number.toString();
-                    console.log(_this._dice2Number);
-                    // move dices off
-                    _this._moveDices = false;
-                });
+                if (!_this._moveDices) {
+                    // move dices on
+                    _this._moveDices = true;
+                    _this.sleep(1000).then(function () {
+                        _this._dice1Number = Math.floor(util.Mathf.RandomRange(1, 6));
+                        _this._dice1.image = _this._diceArray[_this._dice1Number];
+                        _this._dice1Label.text = _this._dice1Number.toString();
+                        console.log(_this._dice1Number);
+                        _this._dice2Number = Math.floor(util.Mathf.RandomRange(1, 6));
+                        _this._dice2.image = _this._diceArray[_this._dice2Number];
+                        _this._dice2Label.text = _this._dice2Number.toString();
+                        console.log(_this._dice2Number);
+                        // move dices off
+                        _this._moveDices = false;
+                    });
+                }
             });
             this.Main();
         };
@@ -101,6 +105,7 @@ var scenes;
          * @memberof Play
          */
         Play.prototype.Main = function () {
+            this.addChild(this._diceTable);
             this.addChild(this._dice1);
             this.addChild(this._dice1Label);
             this.addChild(this._dice2);

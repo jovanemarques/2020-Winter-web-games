@@ -13,6 +13,7 @@ let Game = (function(){
 
     let assetManifest = 
     [
+        {id:"diceTable", src:"./Assets/images/table.png"},
         {id:"diceBlank", src:"./Assets/images/blank.png"},
         {id:"dice1", src:"./Assets/images/1.png"},
         {id:"dice2", src:"./Assets/images/2.png"},
