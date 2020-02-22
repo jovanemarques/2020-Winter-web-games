@@ -9,6 +9,7 @@ var Game = (function () {
     var currentScene;
     var assets;
     var assetManifest = [
+        { id: "_startBonusButton", src: "./Assets/images/buttonBonus.png" },
         { id: "diceTable", src: "./Assets/images/table.png" },
         { id: "diceBlank", src: "./Assets/images/blank.png" },
         { id: "dice1", src: "./Assets/images/1.png" },
@@ -79,6 +80,10 @@ var Game = (function () {
             case scenes.State.END:
                 console.log("switch to End Scene");
                 currentScene = new scenes.End();
+                break;
+            case scenes.State.PLAY_BONUS:
+                console.log("switch to Play Bonus Scene");
+                currentScene = new scenes.PlayBonus();
                 break;
         }
         currentSceneState = config.Game.SCENE;

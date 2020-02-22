@@ -61,10 +61,10 @@ module scenes
         public Start(): void 
         {
             this._diceTable = new createjs.Bitmap(config.Game.ASSETS.getResult("diceTable"));
-            this._dice1 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 100, 150);
-            this._dice1Label = new objects.Label("0", "30px", void 0, "#FFFFFF", 200, 360);
-            this._dice2 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 350, 150);
-            this._dice2Label = new objects.Label("0", "30px", void 0, "#FFFFFF", 450, 360);
+            this._dice1 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 100, 120);
+            this._dice1Label = new objects.Label("0", "50px", void 0, "#FFFFFF", 190, 330);
+            this._dice2 = new objects.Button(config.Game.ASSETS.getResult("diceBlank"), 350, 120);
+            this._dice2Label = new objects.Label("0", "50px", void 0, "#FFFFFF", 440, 330);
             this._rollBtn = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 250, 400);
             this._rollBtn.on('click', (e) => {
                 if (!this._moveDices){

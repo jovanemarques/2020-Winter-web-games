@@ -116,4 +116,4 @@ var scenes;
     }(objects.Scene));
     scenes.Play = Play;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=Play.js.map
+//# sourceMappingURL=Play copy.js.map
