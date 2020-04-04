@@ -1,0 +1,47 @@
+{
+
+"images": [
+    "atlas-exported.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 35, 27, 0, 0, 0],
+    [35, 0, 9, 33, 0, 0, 0],
+    [44, 0, 9, 33, 0, 0, 0],
+    [53, 0, 44, 42, 0, 0, 0],
+    [97, 0, 98, 50, 0, 0, 0],
+    [195, 0, 56, 54, 0, 0, 0],
+    [0, 42, 56, 54, 0, 0, 0],
+    [56, 50, 99, 75, 0, 0, 0],
+    [155, 54, 99, 75, 0, 0, 0],
+    [0, 125, 90, 77, 0, 0, 0],
+    [90, 129, 90, 77, 0, 0, 0],
+    [0, 206, 91, 91, 0, 0, 0],
+    [91, 206, 136, 111, 0, 0, 0],
+    [0, 317, 151, 118, 0, 0, 0]
+],
+
+"animations": {
+    "life": { "frames": [0] },
+    "laserGreen": { "frames": [1] },
+    "laserRed": { "frames": [2] },
+    "meteorSmall": { "frames": [3] },
+    "enemyShip": { "frames": [4] },
+    "laserGreenShot": { "frames": [5] },
+    "laserRedShot": { "frames": [6] },
+    "player": { "frames": [7] },
+    "playerDamaged": { "frames": [8] },
+    "playerLeft": { "frames": [9] },
+    "playerRight": { "frames": [10] },
+    "enemyUFO": { "frames": [11] },
+    "meteorBig": { "frames": [12] },
+    "shield": { "frames": [13] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:43b888098319dbde05aede5d8e0b732f:e0e6b9cb31f7b8c424b2f5631845bc94:29b4bab051f81caa304b5009ec5aca6c$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
