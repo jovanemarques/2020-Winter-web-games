@@ -61,9 +61,9 @@ var managers;
                         }
                     }
                     break;
-                case enums.GameObjectType.CLOUD:
+                case enums.GameObjectType.METEOR:
                     {
-                        console.log("Collision with Cloud!");
+                        console.log("Collision with Meteor!");
                         var thunderSound = createjs.Sound.play("thunder");
                         thunderSound.volume = 0.2;
                         config.Game.SCORE_BOARD.Lives -= 1;

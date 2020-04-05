@@ -14,40 +14,40 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Ocean = /** @class */ (function (_super) {
-        __extends(Ocean, _super);
+    var Space = /** @class */ (function (_super) {
+        __extends(Space, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Ocean() {
-            var _this = _super.call(this, config.Game.OCEAN_ATLAS, "ocean") || this;
+        function Space() {
+            var _this = _super.call(this, config.Game.SPACE_ATLAS, "space") || this;
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
-        Ocean.prototype._checkBounds = function () {
+        Space.prototype._checkBounds = function () {
             if (this.y >= 0) {
                 this.Reset();
             }
         };
-        Ocean.prototype._move = function () {
+        Space.prototype._move = function () {
             this.position = objects.Vector2.add(this.position, this.velocity);
         };
         // PUBLIC METHODS
-        Ocean.prototype.Start = function () {
-            this.type = enums.GameObjectType.OCEAN;
+        Space.prototype.Start = function () {
+            this.type = enums.GameObjectType.SPACE;
             this._verticalSpeed = 5; // 5 px per frame
             this.velocity = new objects.Vector2(0, this._verticalSpeed);
             this.Reset();
         };
-        Ocean.prototype.Update = function () {
+        Space.prototype.Update = function () {
             this._move();
             this._checkBounds();
         };
-        Ocean.prototype.Reset = function () {
-            this.position = new objects.Vector2(0, -960);
+        Space.prototype.Reset = function () {
+            this.position = new objects.Vector2(0, -762);
         };
-        return Ocean;
+        return Space;
     }(objects.GameObject));
-    objects.Ocean = Ocean;
+    objects.Space = Space;
 })(objects || (objects = {}));
-//# sourceMappingURL=Ocean.js.map
+//# sourceMappingURL=Space.js.map

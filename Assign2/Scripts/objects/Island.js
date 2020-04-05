@@ -19,7 +19,7 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Island() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "island", new objects.Vector2(), true) || this;
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorSmall", new objects.Vector2(), true) || this;
             _this.Start();
             return _this;
         }

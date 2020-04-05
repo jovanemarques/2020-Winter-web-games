@@ -27,14 +27,14 @@ var scenes;
         // PUBLIC METHODS
         //initialize and instatiate
         Play.prototype.Start = function () {
-            this._ocean = new objects.Ocean();
-            this._plane = new objects.Plane();
+            this._space = new objects.Space();
+            this._ship = new objects.Ship();
             this._island = new objects.Island();
             // create the cloud array
-            this._clouds = new Array(); // empty container
+            this._meteor = new Array(); // empty container
             // instantiating CLOUD_NUM clouds
             for (var index = 0; index < config.Game.CLOUD_NUM; index++) {
-                this._clouds.push(new objects.Cloud());
+                this._meteor.push(new objects.Meteor());
             }
             this._scoreBoard = new managers.ScoreBoard();
             config.Game.SCORE_BOARD = this._scoreBoard;
@@ -46,22 +46,22 @@ var scenes;
         };
         Play.prototype.Update = function () {
             var _this = this;
-            this._ocean.Update();
-            this._plane.Update();
+            this._space.Update();
+            this._ship.Update();
             this._bulletManager.Update();
             this._island.Update();
-            managers.Collision.AABBCheck(this._plane, this._island);
-            this._clouds.forEach(function (cloud) {
+            managers.Collision.AABBCheck(this._ship, this._island);
+            this._meteor.forEach(function (cloud) {
                 cloud.Update();
-                managers.Collision.squaredRadiusCheck(_this._plane, cloud);
+                managers.Collision.squaredRadiusCheck(_this._ship, cloud);
             });
         };
         Play.prototype.Main = function () {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._island);
-            this.addChild(this._plane);
+            this.addChild(this._ship);
             this._bulletManager.AddBulletsToScene(this);
-            for (var _i = 0, _a = this._clouds; _i < _a.length; _i++) {
+            for (var _i = 0, _a = this._meteor; _i < _a.length; _i++) {
                 var cloud = _a[_i];
                 this.addChild(cloud);
             }
@@ -69,7 +69,7 @@ var scenes;
             this.addChild(this._scoreBoard.ScoreLabel);
         };
         Play.prototype.Clean = function () {
-            this._plane.engineSound.stop();
+            this._ship.engineSound.stop();
             this.removeAllChildren();
         };
         return Play;

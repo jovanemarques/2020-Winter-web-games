@@ -1,9 +1,9 @@
 {
-  "name": "comp397-w2020-lesson11c",
-  "version": "1.0.0",
-  "description": "demo for Lesson 11",
+  "name": "comp397-w2020-assign2-jovane",
+  "version": "0.0.1",
+  "description": "assingment 2 - jovane",
   "main": "game.js",
-  "author": "Tom Tsiliopoulos",
+  "author": "Jovane Marques",
   "license": "MIT",
   "dependencies": {
     "createjs": "^1.0.1",

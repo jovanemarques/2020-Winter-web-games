@@ -12,12 +12,14 @@ let Game = (function(){
     let assets: createjs.LoadQueue;
 
     let textureAtlas: createjs.SpriteSheet;
-    let oceanAtlas: createjs.SpriteSheet;
+    let spaceAtlas: createjs.SpriteSheet;
 
     let assetManifest = 
     [
-        {id:"ocean", src:"./Assets/images/ocean.gif"},
+        {id:"space", src:"./Assets/images/space.png"},
+        //{id:"space", src:"./Assets/images/space.gif"},
         {id:"atlas", src:"./Assets/sprites/atlas.png"},
+        {id:"atlas-exported", src:"./Assets/sprites/atlas-exported.png"},
         {id:"engine", src:"./Assets/audio/engine.ogg"},
         {id:"yay", src:"./Assets/audio/yay.ogg"},
         {id:"thunder", src:"./Assets/audio/thunder.ogg"},
@@ -54,16 +56,53 @@ let Game = (function(){
             "startButton": { "frames": [9] }
         }
         
-        };
+    };
 
-    let oceanData = 
+    let spriteDataNew =
     {
         "images": {},
         "frames": [
-            [0, 0, 640, 1440, 0, 0, 0],
+            [0, 0, 35, 27, 0, 0, 0],
+            [35, 0, 9, 33, 0, 0, 0],
+            [44, 0, 9, 33, 0, 0, 0],
+            [53, 0, 44, 42, 0, 0, 0],
+            [97, 0, 98, 50, 0, 0, 0],
+            [195, 0, 56, 54, 0, 0, 0],
+            [0, 42, 56, 54, 0, 0, 0],
+            [56, 50, 99, 75, 0, 0, 0],
+            [155, 54, 99, 75, 0, 0, 0],
+            [0, 125, 90, 77, 0, 0, 0],
+            [90, 129, 90, 77, 0, 0, 0],
+            [0, 206, 91, 91, 0, 0, 0],
+            [91, 206, 136, 111, 0, 0, 0],
+            [0, 317, 151, 118, 0, 0, 0]
         ],
         "animations": {
-            "ocean": { "frames": [0] },
+            "life": { "frames": [0] },
+            "laserGreen": { "frames": [1] },
+            "laserRed": { "frames": [2] },
+            "meteorSmall": { "frames": [3] },
+            "enemyShip": { "frames": [4] },
+            "laserGreenShot": { "frames": [5] },
+            "laserRedShot": { "frames": [6] },
+            "player": { "frames": [7] },
+            "playerDamaged": { "frames": [8] },
+            "playerLeft": { "frames": [9] },
+            "playerRight": { "frames": [10] },
+            "enemyUFO": { "frames": [11] },
+            "meteorBig": { "frames": [12] },
+            "shield": { "frames": [13] }
+        }
+    };
+
+    let spaceData = 
+    {
+        "images": {},
+        "frames": [
+            [0, 0, 1010, 2286, 0, 0, 0],
+        ],
+        "animations": {
+            "space": { "frames": [0] },
         }
     }
 
@@ -89,13 +128,17 @@ let Game = (function(){
         createjs.Ticker.on('tick', Update);
         stage.enableMouseOver(20);
 
-        spriteData.images = [assets.getResult("atlas")];
-        textureAtlas = new createjs.SpriteSheet(spriteData);
+        // spriteData.images = [assets.getResult("atlas")];
+        // textureAtlas = new createjs.SpriteSheet(spriteData);
+        // config.Game.TEXTURE_ATLAS = textureAtlas;
+        
+        spriteDataNew.images = [assets.getResult("atlas-exported")];
+        textureAtlas = new createjs.SpriteSheet(spriteDataNew);
         config.Game.TEXTURE_ATLAS = textureAtlas;
 
-        oceanData.images = [assets.getResult("ocean")];
-        oceanAtlas = new createjs.SpriteSheet(oceanData);
-        config.Game.OCEAN_ATLAS = oceanAtlas;
+        spaceData.images = [assets.getResult("space")];
+        spaceAtlas = new createjs.SpriteSheet(spaceData);
+        config.Game.SPACE_ATLAS = spaceAtlas;
         
         currentSceneState = scenes.State.NO_SCENE;
         config.Game.SCENE = scenes.State.START;

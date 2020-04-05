@@ -5,7 +5,7 @@ module scenes
         // PRIVATE INSTANCE MEMBERS
         private _gameOverLabel: objects.Label;
         private _restartButton: objects.Button;
-        private _ocean: objects.Ocean;
+        private _space: objects.Space;
 
         private _scoreBoard: managers.ScoreBoard;
 
@@ -29,9 +29,9 @@ module scenes
              //instantiate a new Text object
             this._gameOverLabel = new objects.Label("Game Over", "80px", "Consolas", "#FFFF00", 320, 180, true);
             // buttons
-             this._restartButton = new objects.Button("restartButton", 320, 430, true);
+             this._restartButton = new objects.Button("enemyUFO", 320, 430, true);
             
-             this._ocean = new objects.Ocean();
+             this._space = new objects.Space();
 
              this._scoreBoard  = new managers.ScoreBoard();
              this._scoreBoard.HighScore = config.Game.HIGH_SCORE;
@@ -40,12 +40,12 @@ module scenes
         
         public Update(): void 
         {
-            this._ocean.Update();
+            this._space.Update();
         }
         
         public Main(): void 
         {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
 
             this.addChild(this._gameOverLabel);
 

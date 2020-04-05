@@ -1,6 +1,6 @@
 module objects
 {
-    export class Plane extends GameObject
+    export class Ship extends GameObject
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalPosition:number;
@@ -17,8 +17,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "plane", 0, 0, true);
-
+            super(config.Game.TEXTURE_ATLAS, "player", 0, 0, true);
             this.Start();
         }
 
@@ -45,20 +44,30 @@ module objects
             if((config.Game.KEYBOARD_MANAGER.MoveLeft) || (config.Game.KEYBOARD_MANAGER.MoveRight))
             {
                 let newPositionX = (config.Game.KEYBOARD_MANAGER.MoveRight) ? 
-                this.position.x + this._horizontalSpeed : this.position.x - this._horizontalSpeed;
-
-                // TODO: make movement smoother with a velocity function
+                this._moveRight() : this._moveLeft();
 
                 this.position = new Vector2(newPositionX, this._verticalPosition);
+            } else {
+                this.gotoAndStop('player');
             }
             
             this._bulletSpawn = new Vector2(this.position.x, this.position.y - this.halfHeight);
+        }
+
+        private _moveLeft() : number{
+            this.gotoAndStop('playerLeft');
+            return this.position.x - this._horizontalSpeed;
+        }
+
+        private _moveRight() : number{
+            this.gotoAndStop('playerRight');
+            return this.position.x + this._horizontalSpeed;
         }
         
         // PUBLIC METHODS
         public Start(): void 
         {
-            this.type = enums.GameObjectType.PLANE;
+            this.type = enums.GameObjectType.SHIP;
             this._verticalPosition = 430; // locked to the bottom of the screen
             this._engineSound = createjs.Sound.play("engine");
             this._engineSound.loop = -1; // loop forever

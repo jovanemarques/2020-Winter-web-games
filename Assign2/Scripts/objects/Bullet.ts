@@ -10,7 +10,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "bullet", new Vector2(), true);
+            super(config.Game.TEXTURE_ATLAS, "laserRed", new Vector2(), true);
 
             this.Start();
         }

@@ -27,17 +27,17 @@ var scenes;
         // PUBLIC METHODS
         Start.prototype.Start = function () {
             //instantiate a new Text object
-            this._welcomeLabel = new objects.Label("Mail Pilot", "80px", "Consolas", "#FFFF00", 320, 180, true);
+            this._welcomeLabel = new objects.Label("Space Travel", "80px", "Consolas", "#FFFF00", 320, 180, true);
             // buttons
-            this._startButton = new objects.Button("startButton", 320, 430, true);
-            this._ocean = new objects.Ocean();
+            this._startButton = new objects.Button("enemyUFO", 320, 430, true);
+            this._space = new objects.Space();
             this.Main();
         };
         Start.prototype.Update = function () {
-            this._ocean.Update();
+            this._space.Update();
         };
         Start.prototype.Main = function () {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._welcomeLabel);
             this.addChild(this._startButton);
             this._startButton.on("click", function () {

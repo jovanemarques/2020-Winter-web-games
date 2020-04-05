@@ -30,17 +30,17 @@ var scenes;
             //instantiate a new Text object
             this._gameOverLabel = new objects.Label("Game Over", "80px", "Consolas", "#FFFF00", 320, 180, true);
             // buttons
-            this._restartButton = new objects.Button("restartButton", 320, 430, true);
-            this._ocean = new objects.Ocean();
+            this._restartButton = new objects.Button("enemyUFO", 320, 430, true);
+            this._space = new objects.Space();
             this._scoreBoard = new managers.ScoreBoard();
             this._scoreBoard.HighScore = config.Game.HIGH_SCORE;
             this.Main();
         };
         End.prototype.Update = function () {
-            this._ocean.Update();
+            this._space.Update();
         };
         End.prototype.Main = function () {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._gameOverLabel);
             this.addChild(this._restartButton);
             this._restartButton.on("click", function () {

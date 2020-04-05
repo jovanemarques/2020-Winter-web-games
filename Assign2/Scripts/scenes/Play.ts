@@ -3,11 +3,11 @@ module scenes
     export class Play extends objects.Scene
     {
         // PRIVATE INSTANCE MEMBERS
-        private _ocean?: objects.Ocean;
-        private _plane?: objects.Plane;
+        private _space?: objects.Space;
+        private _ship?: objects.Ship;
         private _island?: objects.Island;
 
-        private _clouds: Array<objects.Cloud>;
+        private _meteor: Array<objects.Meteor>;
 
         private _scoreBoard: managers.ScoreBoard;
         private _bulletManager: managers.Bullet;
@@ -31,17 +31,17 @@ module scenes
         public Start(): void 
         {
             
-            this._ocean = new objects.Ocean();
-            this._plane = new objects.Plane();
+            this._space = new objects.Space();
+            this._ship = new objects.Ship();
             this._island = new objects.Island();
             
             // create the cloud array
-            this._clouds = new Array<objects.Cloud>(); // empty container
+            this._meteor = new Array<objects.Meteor>(); // empty container
 
             // instantiating CLOUD_NUM clouds
             for (let index = 0; index < config.Game.CLOUD_NUM; index++) 
             {
-                this._clouds.push(new objects.Cloud());
+                this._meteor.push(new objects.Meteor());
             }
             
             this._scoreBoard = new managers.ScoreBoard();
@@ -58,33 +58,33 @@ module scenes
         
         public Update(): void 
         {
-           this._ocean.Update();
+           this._space.Update();
 
-           this._plane.Update();
+           this._ship.Update();
 
           this._bulletManager.Update();
 
            this._island.Update();
 
-           managers.Collision.AABBCheck(this._plane, this._island);
+           managers.Collision.AABBCheck(this._ship, this._island);
 
-           this._clouds.forEach(cloud => {
+           this._meteor.forEach(cloud => {
                cloud.Update();
-               managers.Collision.squaredRadiusCheck(this._plane, cloud);
+               managers.Collision.squaredRadiusCheck(this._ship, cloud);
            });
         }
         
         public Main(): void 
         {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
 
             this.addChild(this._island);
 
-            this.addChild(this._plane);
+            this.addChild(this._ship);
 
             this._bulletManager.AddBulletsToScene(this);
 
-            for (const cloud of this._clouds) {
+            for (const cloud of this._meteor) {
                 this.addChild(cloud);
             }
 
@@ -95,7 +95,7 @@ module scenes
 
         public Clean(): void
         {
-            this._plane.engineSound.stop();
+            this._ship.engineSound.stop();
             this.removeAllChildren();
         }
 

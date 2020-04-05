@@ -81,4 +81,4 @@ var objects;
     }(objects.GameObject));
     objects.Plane = Plane;
 })(objects || (objects = {}));
-//# sourceMappingURL=Plane.js.map
+//# sourceMappingURL=Plane copy.js.map

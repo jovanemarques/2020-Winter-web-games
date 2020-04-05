@@ -1,6 +1,6 @@
 module objects
 {
-    export class Cloud extends GameObject
+    export class Meteor extends GameObject
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalSpeed?:number;
@@ -11,7 +11,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "cloud", new Vector2(), true);
+            super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
 
             this.Start();
         }
@@ -34,8 +34,8 @@ module objects
         // PUBLIC METHODS
         public Start(): void 
         {
-            this.type = enums.GameObjectType.CLOUD;
-            this.alpha = 0.5; // 50% transparent
+            this.type = enums.GameObjectType.METEOR;
+            //this.alpha = 0.5; // 50% transparent
             this.Reset();
         }
         
