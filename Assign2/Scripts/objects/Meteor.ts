@@ -9,9 +9,10 @@ module objects
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR;
-        constructor()
+        constructor(first:createjs.SpriteSheet = config.Game.TEXTURE_ATLAS, second:string = "meteorBig", vector:Vector2 = new Vector2())
+        // constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
+            super(config.Game.TEXTURE_ATLAS, "meteorBig", vector, true);
             // const meteorType = Math.round(util.Mathf.RandomRange(1, 2));
             // if (meteorType === 1){
             //     super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);

@@ -18,8 +18,11 @@ var objects;
         __extends(Meteor, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR;
-        function Meteor() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorBig", new objects.Vector2(), true) || this;
+        function Meteor(first, second, vector) {
+            if (first === void 0) { first = config.Game.TEXTURE_ATLAS; }
+            if (second === void 0) { second = "meteorBig"; }
+            if (vector === void 0) { vector = new objects.Vector2(); }
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorBig", vector, true) || this;
             // const meteorType = Math.round(util.Mathf.RandomRange(1, 2));
             // if (meteorType === 1){
             //     super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);

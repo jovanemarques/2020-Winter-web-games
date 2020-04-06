@@ -157,8 +157,8 @@ let Game = (function(){
                 currentScene = new scenes.End(); 
                 break;
         }
-
         currentSceneState = config.Game.SCENE;
+        config.Game.CURRENT_SCENE = currentScene;
         stage.addChild(currentScene);
 
     }

@@ -17,5 +17,6 @@ module config
         public static TEXTURE_ATLAS: createjs.SpriteSheet;
         public static SPACE_ATLAS: createjs.SpriteSheet;
         public static METEORS: Array<objects.Meteor>;
+        public static CURRENT_SCENE: objects.Scene;
     }
 }

@@ -33,7 +33,9 @@ module objects
 
         private _move():void 
         {
-            this.position = Vector2.add(this.position, this.velocity);
+            if (this.isActive){
+                this.position = Vector2.add(this.position, this.velocity);
+            }
         }
 
         // PUBLIC METHODS

@@ -7,6 +7,7 @@ module enums
         SPACE,
         BUTTON,
         PLAYER,
+        BOSS,
         BULLET,
         UNDEFINED,
         NUM_OF_TYPES

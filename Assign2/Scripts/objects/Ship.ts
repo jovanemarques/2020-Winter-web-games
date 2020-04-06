@@ -83,7 +83,7 @@ module objects
             this._checkBounds();
 
             // fire bullets every 10 frames
-            if(createjs.Ticker.getTicks() % 10 == 0)
+            if(createjs.Ticker.getTicks() % 30 == 0)
             {
                 if(config.Game.KEYBOARD_MANAGER.Fire)
                 {

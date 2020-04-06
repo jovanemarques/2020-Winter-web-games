@@ -29,6 +29,7 @@ var scenes;
         Play.prototype.Start = function () {
             this._space = new objects.Space();
             this._ship = new objects.Ship();
+            this._boss = new objects.Boss();
             // create the meteor array
             this._meteor = new Array(); // empty container
             // instantiating METEOR_NUM meteors
@@ -48,32 +49,44 @@ var scenes;
             var _this = this;
             this._space.Update();
             this._ship.Update();
+            var bulletPull = config.Game.BULLET_MANAGER.GetBulletPull();
+            if (this._boss.isActive) {
+                this._boss.Update();
+            }
             this._bulletManager.Update();
-            this._meteor.forEach(function (meteor) {
-                meteor.Update();
-                if (createjs.Ticker.getTicks() % 10 == 0) {
-                    managers.Collision.squaredRadiusCheck(_this._ship, meteor);
-                    var bulletPull = config.Game.BULLET_MANAGER.GetBulletPull();
-                    bulletPull.forEach(function (bullet) {
-                        bullet.Update();
-                        if (bullet.isActive) {
-                            if (managers.Collision.squaredRadiusCheck(bullet, meteor)) {
-                                if (meteor.currentAnimation == 'meteorBig') {
-                                    _this.removeChild(meteor);
-                                    meteor.gotoAndStop('meteorSmall');
-                                    _this.addChild(meteor);
-                                }
-                                else {
-                                    meteor.Stop();
-                                    _this.removeChild(meteor);
+            if (this._meteor.length > 0) {
+                this._meteor.forEach(function (meteor, index) {
+                    meteor.Update();
+                    if (createjs.Ticker.getTicks() % 10 == 0) {
+                        managers.Collision.squaredRadiusCheck(_this._ship, meteor);
+                        bulletPull.forEach(function (bullet) {
+                            bullet.Update();
+                            if (bullet.isActive) {
+                                if (managers.Collision.squaredRadiusCheck(bullet, meteor)) {
+                                    if (meteor.currentAnimation == 'meteorBig') {
+                                        _this.removeChild(meteor);
+                                        meteor.gotoAndStop('meteorSmall');
+                                        _this.addChild(meteor);
+                                    }
+                                    else {
+                                        meteor.Stop();
+                                        _this.removeChild(meteor);
+                                        _this._meteor.splice(index, 1);
+                                    }
                                 }
                             }
-                        }
-                        else {
-                        }
-                    });
+                            else {
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                if (!this._boss.isActive) {
+                    this._boss.isActive = true;
+                    this.addChild(this._boss);
                 }
-            });
+            }
         };
         Play.prototype.Main = function () {
             this.addChild(this._space);

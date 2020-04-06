@@ -127,6 +127,7 @@ var Game = (function () {
                 break;
         }
         currentSceneState = config.Game.SCENE;
+        config.Game.CURRENT_SCENE = currentScene;
         stage.addChild(currentScene);
     }
     window.addEventListener('load', Preload);

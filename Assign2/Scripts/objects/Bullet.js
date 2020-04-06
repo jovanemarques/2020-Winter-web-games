@@ -35,7 +35,9 @@ var objects;
             }
         };
         Bullet.prototype._move = function () {
-            this.position = objects.Vector2.add(this.position, this.velocity);
+            if (this.isActive) {
+                this.position = objects.Vector2.add(this.position, this.velocity);
+            }
         };
         // PUBLIC METHODS
         Bullet.prototype.Start = function () {

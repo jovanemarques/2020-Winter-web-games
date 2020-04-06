@@ -77,6 +77,10 @@ module managers
                 if (object1.isActive){
                     console.log("Collision with Meteor >> Bullet!");
                     let thunderSound = createjs.Sound.play("thunder");
+                    config.Game.SCORE_BOARD.Score += 100;
+                    if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                        config.Game.HIGH_SCORE = config.Game.SCORE;
+                    }
                     thunderSound.volume = 0.2;
                     object2.rotation += 10;
                 }

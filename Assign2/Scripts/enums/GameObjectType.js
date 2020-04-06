@@ -8,9 +8,10 @@ var enums;
         GameObjectType[GameObjectType["SPACE"] = 2] = "SPACE";
         GameObjectType[GameObjectType["BUTTON"] = 3] = "BUTTON";
         GameObjectType[GameObjectType["PLAYER"] = 4] = "PLAYER";
-        GameObjectType[GameObjectType["BULLET"] = 5] = "BULLET";
-        GameObjectType[GameObjectType["UNDEFINED"] = 6] = "UNDEFINED";
-        GameObjectType[GameObjectType["NUM_OF_TYPES"] = 7] = "NUM_OF_TYPES";
+        GameObjectType[GameObjectType["BOSS"] = 5] = "BOSS";
+        GameObjectType[GameObjectType["BULLET"] = 6] = "BULLET";
+        GameObjectType[GameObjectType["UNDEFINED"] = 7] = "UNDEFINED";
+        GameObjectType[GameObjectType["NUM_OF_TYPES"] = 8] = "NUM_OF_TYPES";
     })(GameObjectType = enums.GameObjectType || (enums.GameObjectType = {}));
 })(enums || (enums = {}));
 //# sourceMappingURL=GameObjectType.js.map

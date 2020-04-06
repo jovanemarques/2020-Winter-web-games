@@ -23,7 +23,7 @@ module scenes
         public Start(): void 
         {
              //instantiate a new Text object
-            this._welcomeLabel = new objects.Label("Space Battle", "80px", "Consolas", "#FFFF00", 320, 180, true);
+            this._welcomeLabel = new objects.Label("Space Battle", "80px", "Consolas", "#FFFFFF", 320, 180, true);
             // buttons
              this._startButton = new objects.Button("player", 320, 430, true);
 
