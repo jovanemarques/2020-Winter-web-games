@@ -12,7 +12,6 @@ var Game = (function () {
     var spaceAtlas;
     var assetManifest = [
         { id: "space", src: "./Assets/images/space.png" },
-        //{id:"space", src:"./Assets/images/space.gif"},
         { id: "atlas-exported", src: "./Assets/sprites/atlas-exported.png" },
         { id: "theme", src: "./Assets/audio/theme.ogg" },
         { id: "pew", src: "./Assets/audio/pew.ogg" },
@@ -81,9 +80,6 @@ var Game = (function () {
         createjs.Ticker.framerate = config.Game.FPS;
         createjs.Ticker.on('tick', Update);
         stage.enableMouseOver(20);
-        // spriteData.images = [assets.getResult("atlas")];
-        // textureAtlas = new createjs.SpriteSheet(spriteData);
-        // config.Game.TEXTURE_ATLAS = textureAtlas;
         spriteDataNew.images = [assets.getResult("atlas-exported")];
         textureAtlas = new createjs.SpriteSheet(spriteDataNew);
         config.Game.TEXTURE_ATLAS = textureAtlas;

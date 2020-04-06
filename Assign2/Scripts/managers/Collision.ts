@@ -12,7 +12,6 @@ module managers
                 if(!object2.isColliding)
                     {
                         Collision._collisionResponse(object1, object2);
-                        //Collision._collisionResponse(object2);
                         object2.isColliding = true;
                         return true;
                     }
@@ -40,7 +39,6 @@ module managers
             {
                 if(!object2.isColliding)
                 {
-                    //Collision._collisionResponse(object2);
                     Collision._collisionResponse(object1, object2);
                     object2.isColliding = true;
                     return true;
@@ -80,8 +78,6 @@ module managers
                     console.log("Collision with Meteor >> Bullet!");
                     let thunderSound = createjs.Sound.play("thunder");
                     thunderSound.volume = 0.2;
-                    // config.Game.SCORE_BOARD.Lives -= 1;
-                    //delete object2;
                     object2.rotation += 10;
                 }
             }

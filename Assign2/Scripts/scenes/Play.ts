@@ -5,7 +5,6 @@ module scenes
         // PRIVATE INSTANCE MEMBERS
         private _space?: objects.Space;
         private _ship?: objects.Ship;
-        // private _island?: objects.Island;
 
         private _meteor: Array<objects.Meteor>;
 
@@ -33,7 +32,6 @@ module scenes
             
             this._space = new objects.Space();
             this._ship = new objects.Ship();
-            // this._island = new objects.Island();
             
             // create the meteor array
             this._meteor = new Array<objects.Meteor>(); // empty container
@@ -65,10 +63,6 @@ module scenes
 
           this._bulletManager.Update();
 
-        //    this._island.Update();
-
-        //    managers.Collision.AABBCheck(this._ship, this._island);
-
             this._meteor.forEach(meteor => {
                meteor.Update();
                 if(createjs.Ticker.getTicks() % 10 == 0){
@@ -99,8 +93,6 @@ module scenes
         public Main(): void 
         {
             this.addChild(this._space);
-
-            // this.addChild(this._island);
 
             this.addChild(this._ship);
 

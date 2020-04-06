@@ -10,7 +10,6 @@ var managers;
             if (objects.Vector2.sqrDistance(object1.position, object2.position) < (radii * radii)) {
                 if (!object2.isColliding) {
                     Collision._collisionResponse(object1, object2);
-                    //Collision._collisionResponse(object2);
                     object2.isColliding = true;
                     return true;
                 }
@@ -31,7 +30,6 @@ var managers;
                 object1TopLeft.y < object2TopLeft.y + object2.height &&
                 object1TopLeft.y + object1.height > object2TopLeft.y) {
                 if (!object2.isColliding) {
-                    //Collision._collisionResponse(object2);
                     Collision._collisionResponse(object1, object2);
                     object2.isColliding = true;
                     return true;
@@ -67,8 +65,6 @@ var managers;
                     console.log("Collision with Meteor >> Bullet!");
                     var thunderSound = createjs.Sound.play("thunder");
                     thunderSound.volume = 0.2;
-                    // config.Game.SCORE_BOARD.Lives -= 1;
-                    //delete object2;
                     object2.rotation += 10;
                 }
             }

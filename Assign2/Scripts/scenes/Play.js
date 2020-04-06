@@ -29,7 +29,6 @@ var scenes;
         Play.prototype.Start = function () {
             this._space = new objects.Space();
             this._ship = new objects.Ship();
-            // this._island = new objects.Island();
             // create the meteor array
             this._meteor = new Array(); // empty container
             // instantiating METEOR_NUM meteors
@@ -50,8 +49,6 @@ var scenes;
             this._space.Update();
             this._ship.Update();
             this._bulletManager.Update();
-            //    this._island.Update();
-            //    managers.Collision.AABBCheck(this._ship, this._island);
             this._meteor.forEach(function (meteor) {
                 meteor.Update();
                 if (createjs.Ticker.getTicks() % 10 == 0) {
@@ -80,7 +77,6 @@ var scenes;
         };
         Play.prototype.Main = function () {
             this.addChild(this._space);
-            // this.addChild(this._island);
             this.addChild(this._ship);
             this._bulletManager.AddBulletsToScene(this);
             for (var _i = 0, _a = this._meteor; _i < _a.length; _i++) {
