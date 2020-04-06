@@ -13,11 +13,7 @@ var Game = (function () {
     var assetManifest = [
         { id: "space", src: "./Assets/images/space.png" },
         //{id:"space", src:"./Assets/images/space.gif"},
-        { id: "atlas", src: "./Assets/sprites/atlas.png" },
         { id: "atlas-exported", src: "./Assets/sprites/atlas-exported.png" },
-        { id: "engine", src: "./Assets/audio/engine.ogg" },
-        { id: "yay", src: "./Assets/audio/yay.ogg" },
-        { id: "thunder", src: "./Assets/audio/thunder.ogg" },
         { id: "theme", src: "./Assets/audio/theme.ogg" },
         { id: "pew", src: "./Assets/audio/pew.ogg" },
         { id: "poin", src: "./Assets/audio/poin.ogg" },
