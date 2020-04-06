@@ -18,7 +18,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "player", 0, 0, true);
+            super(config.Game.TEXTURE_ATLAS, "player-animated", 0, 0, true);
             this.Start();
         }
 
@@ -49,7 +49,7 @@ module objects
 
                 this.position = new Vector2(newPositionX, this._verticalPosition);
             } else {
-                this.gotoAndStop('player');
+                this.gotoAndPlay('player-animated');
             }
             
             this._bulletSpawn = new Vector2(this.position.x, this.position.y - this.halfHeight);

@@ -112,7 +112,7 @@
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
                 <key>heuristic</key>
-                <enum type="AlgorithmMaxRectsSettings::Heuristic">BottomLeft</enum>
+                <enum type="AlgorithmMaxRectsSettings::Heuristic">Best</enum>
             </struct>
             <key>basic</key>
             <struct type="AlgorithmBasicSettings">
@@ -181,7 +181,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../Assets/_spaceArt/png/enemyShip.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/enemyShip.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -196,7 +196,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/enemyUFO.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/enemyUFO.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -211,8 +211,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/laserGreen.png</key>
-            <key type="filename">../../../Assets/_spaceArt/png/laserRed.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/laserGreen.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/laserRed.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -227,8 +227,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/laserGreenShot.png</key>
-            <key type="filename">../../../Assets/_spaceArt/png/laserRedShot.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/laserGreenShot.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/laserRedShot.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -243,7 +243,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/life.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/life.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -258,7 +258,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/meteorBig.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/meteorBig.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -273,7 +273,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/meteorSmall.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/meteorSmall.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -288,8 +288,24 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/player.png</key>
-            <key type="filename">../../../Assets/_spaceArt/png/playerDamaged.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/player-animated-1.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/player-animated-2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,23,49,47</rect>
+                <key>scale9Paddings</key>
+                <rect>25,23,49,47</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Assets/_spaceArt/png/player.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/playerDamaged.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -304,8 +320,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/playerLeft.png</key>
-            <key type="filename">../../../Assets/_spaceArt/png/playerRight.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/playerLeft.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/playerRight.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -320,7 +336,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Assets/_spaceArt/png/shield.png</key>
+            <key type="filename">../../../../Assets/_spaceArt/png/shield.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -338,20 +354,22 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../Assets/_spaceArt/png/enemyShip.png</filename>
-            <filename>../../../Assets/_spaceArt/png/enemyUFO.png</filename>
-            <filename>../../../Assets/_spaceArt/png/laserGreen.png</filename>
-            <filename>../../../Assets/_spaceArt/png/laserGreenShot.png</filename>
-            <filename>../../../Assets/_spaceArt/png/laserRed.png</filename>
-            <filename>../../../Assets/_spaceArt/png/laserRedShot.png</filename>
-            <filename>../../../Assets/_spaceArt/png/life.png</filename>
-            <filename>../../../Assets/_spaceArt/png/meteorBig.png</filename>
-            <filename>../../../Assets/_spaceArt/png/meteorSmall.png</filename>
-            <filename>../../../Assets/_spaceArt/png/player.png</filename>
-            <filename>../../../Assets/_spaceArt/png/playerDamaged.png</filename>
-            <filename>../../../Assets/_spaceArt/png/playerLeft.png</filename>
-            <filename>../../../Assets/_spaceArt/png/playerRight.png</filename>
-            <filename>../../../Assets/_spaceArt/png/shield.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/enemyShip.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/enemyUFO.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/laserGreen.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/laserGreenShot.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/laserRed.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/laserRedShot.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/life.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/meteorBig.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/meteorSmall.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/player.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/playerDamaged.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/playerLeft.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/playerRight.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/shield.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/player-animated-1.png</filename>
+            <filename>../../../../Assets/_spaceArt/png/player-animated-2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

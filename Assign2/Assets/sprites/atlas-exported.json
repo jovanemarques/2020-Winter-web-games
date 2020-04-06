@@ -6,41 +6,44 @@
 
 "framerate": 20,
 "frames": [
-    [0, 0, 35, 27, 0, 0, 0],
-    [35, 0, 9, 33, 0, 0, 0],
-    [44, 0, 9, 33, 0, 0, 0],
-    [53, 0, 44, 42, 0, 0, 0],
-    [97, 0, 98, 50, 0, 0, 0],
-    [195, 0, 56, 54, 0, 0, 0],
-    [0, 42, 56, 54, 0, 0, 0],
-    [56, 50, 99, 75, 0, 0, 0],
-    [155, 54, 99, 75, 0, 0, 0],
-    [0, 125, 90, 77, 0, 0, 0],
-    [90, 129, 90, 77, 0, 0, 0],
-    [0, 206, 91, 91, 0, 0, 0],
-    [91, 206, 136, 111, 0, 0, 0],
-    [0, 317, 151, 118, 0, 0, 0]
+    [0, 0, 151, 118, 0, 0, 0],
+    [151, 0, 91, 91, 0, 0, 0],
+    [151, 91, 90, 77, 0, 0, 0],
+    [0, 118, 136, 111, 0, 0, 0],
+    [136, 118, 9, 33, 0, 0, 0],
+    [136, 151, 9, 33, 0, 0, 0],
+    [145, 168, 99, 93, 0, 0, 0],
+    [0, 229, 99, 93, 0, 0, 0],
+    [99, 229, 44, 42, 0, 0, 0],
+    [143, 261, 99, 75, 0, 0, 0],
+    [99, 271, 35, 27, 0, 0, 0],
+    [0, 322, 99, 75, 0, 0, 0],
+    [0, 397, 98, 50, 0, 0, 0],
+    [99, 336, 90, 77, 0, 0, 0],
+    [189, 336, 56, 54, 0, 0, 0],
+    [189, 390, 56, 54, 0, 0, 0]
 ],
 
 "animations": {
-    "life": { "frames": [0] },
-    "laserGreen": { "frames": [1] },
-    "laserRed": { "frames": [2] },
-    "meteorSmall": { "frames": [3] },
-    "enemyShip": { "frames": [4] },
-    "laserGreenShot": { "frames": [5] },
-    "laserRedShot": { "frames": [6] },
-    "player": { "frames": [7] },
-    "playerDamaged": { "frames": [8] },
-    "playerLeft": { "frames": [9] },
-    "playerRight": { "frames": [10] },
-    "enemyUFO": { "frames": [11] },
-    "meteorBig": { "frames": [12] },
-    "shield": { "frames": [13] }
+    "shield": { "frames": [0] },
+    "enemyUFO": { "frames": [1] },
+    "playerLeft": { "frames": [2] },
+    "meteorBig": { "frames": [3] },
+    "laserGreen": { "frames": [4] },
+    "laserRed": { "frames": [5] },
+    "player-animated": { "frames": [6, 7] },
+    "meteorSmall": { "frames": [8] },
+    "player": { "frames": [9] },
+    "life": { "frames": [10] },
+    "playerDamaged": { "frames": [11] },
+    "enemyShip": { "frames": [12] },
+    "playerRight": { "frames": [13] },
+    "laserGreenShot": { "frames": [14] },
+    "laserRedShot": { "frames": [15] }
 },
 
 "texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:43b888098319dbde05aede5d8e0b732f:e0e6b9cb31f7b8c424b2f5631845bc94:29b4bab051f81caa304b5009ec5aca6c$",
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:95c1c94e115950a262d5c074d8a0681f:82b5531bb69a42b9a0a2d67822281af1:29b4bab051f81caa304b5009ec5aca6c$",
         "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
 ]
 

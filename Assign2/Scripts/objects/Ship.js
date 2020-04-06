@@ -18,7 +18,7 @@ var objects;
         __extends(Ship, _super);
         // CONSTRUCTOR
         function Ship() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "player", 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "player-animated", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
@@ -49,7 +49,7 @@ var objects;
                 this.position = new objects.Vector2(newPositionX, this._verticalPosition);
             }
             else {
-                this.gotoAndStop('player');
+                this.gotoAndPlay('player-animated');
             }
             this._bulletSpawn = new objects.Vector2(this.position.x, this.position.y - this.halfHeight);
         };
