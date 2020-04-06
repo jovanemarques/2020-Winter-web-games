@@ -7,7 +7,7 @@ module config
         public static SCENE: scenes.State;
         public static ASSETS: createjs.LoadQueue;
         public static FPS: number = 60; // 60 Frames per second
-        public static CLOUD_NUM: number = 4;
+        public static METEOR_NUM: number = 4;
         public static LIVES: number = 5;
         public static SCORE: number = 0;
         public static HIGH_SCORE: number = 0;
@@ -16,5 +16,6 @@ module config
         public static KEYBOARD_MANAGER: managers.Keyboard;
         public static TEXTURE_ATLAS: createjs.SpriteSheet;
         public static SPACE_ATLAS: createjs.SpriteSheet;
+        public static METEORS: Array<objects.Meteor>;
     }
 }

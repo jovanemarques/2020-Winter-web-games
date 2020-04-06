@@ -5,7 +5,7 @@ module scenes
         // PRIVATE INSTANCE MEMBERS
         private _space?: objects.Space;
         private _ship?: objects.Ship;
-        private _island?: objects.Island;
+        // private _island?: objects.Island;
 
         private _meteor: Array<objects.Meteor>;
 
@@ -33,16 +33,17 @@ module scenes
             
             this._space = new objects.Space();
             this._ship = new objects.Ship();
-            this._island = new objects.Island();
+            // this._island = new objects.Island();
             
-            // create the cloud array
+            // create the meteor array
             this._meteor = new Array<objects.Meteor>(); // empty container
 
-            // instantiating CLOUD_NUM clouds
-            for (let index = 0; index < config.Game.CLOUD_NUM; index++) 
+            // instantiating METEOR_NUM meteors
+            for (let index = 0; index < config.Game.METEOR_NUM; index++) 
             {
                 this._meteor.push(new objects.Meteor());
             }
+            config.Game.METEORS = this._meteor;
             
             this._scoreBoard = new managers.ScoreBoard();
             config.Game.SCORE_BOARD = this._scoreBoard;
@@ -64,13 +65,21 @@ module scenes
 
           this._bulletManager.Update();
 
-           this._island.Update();
+        //    this._island.Update();
 
-           managers.Collision.AABBCheck(this._ship, this._island);
+        //    managers.Collision.AABBCheck(this._ship, this._island);
 
-           this._meteor.forEach(cloud => {
-               cloud.Update();
-               managers.Collision.squaredRadiusCheck(this._ship, cloud);
+           this._meteor.forEach(meteor => {
+               meteor.Update();
+               managers.Collision.squaredRadiusCheck(this._ship, meteor);
+               
+               managers.Collision.squaredRadiusCheck(this._ship, meteor);
+
+            //    const bulletPull = config.Game.BULLET_MANAGER.GetBulletPull();
+            //     bulletPull.forEach(bullet => {
+            //         bullet.Update();
+            //         managers.Collision.squaredRadiusCheck(bullet, meteor);
+            //     });
            });
         }
         
@@ -78,14 +87,14 @@ module scenes
         {
             this.addChild(this._space);
 
-            this.addChild(this._island);
+            // this.addChild(this._island);
 
             this.addChild(this._ship);
 
             this._bulletManager.AddBulletsToScene(this);
 
-            for (const cloud of this._meteor) {
-                this.addChild(cloud);
+            for (const meteor of this._meteor) {
+                this.addChild(meteor);
             }
 
             this.addChild(this._scoreBoard.LivesLabel);

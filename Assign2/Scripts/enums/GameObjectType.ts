@@ -3,7 +3,6 @@ module enums
     export enum GameObjectType
     {
         SHIP,
-        ISLAND,
         METEOR,
         SPACE,
         BUTTON,

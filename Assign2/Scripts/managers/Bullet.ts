@@ -11,7 +11,6 @@ module managers
         // CONSTRUCTOR
         constructor()
         {
-
             this._buildBulletPool();
         }
 
@@ -38,6 +37,13 @@ module managers
                 scene.addChild(bullet);
             });
         }
+
+        /**
+         * GetBulletPull
+         */
+        public GetBulletPull() : Array<objects.Bullet>{
+            return this._bulletPool;
+        } 
 
 
         public GetBullet():objects.Bullet

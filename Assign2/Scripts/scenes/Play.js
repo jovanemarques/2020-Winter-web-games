@@ -29,13 +29,14 @@ var scenes;
         Play.prototype.Start = function () {
             this._space = new objects.Space();
             this._ship = new objects.Ship();
-            this._island = new objects.Island();
-            // create the cloud array
+            // this._island = new objects.Island();
+            // create the meteor array
             this._meteor = new Array(); // empty container
-            // instantiating CLOUD_NUM clouds
-            for (var index = 0; index < config.Game.CLOUD_NUM; index++) {
+            // instantiating METEOR_NUM meteors
+            for (var index = 0; index < config.Game.METEOR_NUM; index++) {
                 this._meteor.push(new objects.Meteor());
             }
+            config.Game.METEORS = this._meteor;
             this._scoreBoard = new managers.ScoreBoard();
             config.Game.SCORE_BOARD = this._scoreBoard;
             this._bulletManager = new managers.Bullet();
@@ -49,21 +50,27 @@ var scenes;
             this._space.Update();
             this._ship.Update();
             this._bulletManager.Update();
-            this._island.Update();
-            managers.Collision.AABBCheck(this._ship, this._island);
-            this._meteor.forEach(function (cloud) {
-                cloud.Update();
-                managers.Collision.squaredRadiusCheck(_this._ship, cloud);
+            //    this._island.Update();
+            //    managers.Collision.AABBCheck(this._ship, this._island);
+            this._meteor.forEach(function (meteor) {
+                meteor.Update();
+                managers.Collision.squaredRadiusCheck(_this._ship, meteor);
+                managers.Collision.squaredRadiusCheck(_this._ship, meteor);
+                //    const bulletPull = config.Game.BULLET_MANAGER.GetBulletPull();
+                //     bulletPull.forEach(bullet => {
+                //         bullet.Update();
+                //         managers.Collision.squaredRadiusCheck(bullet, meteor);
+                //     });
             });
         };
         Play.prototype.Main = function () {
             this.addChild(this._space);
-            this.addChild(this._island);
+            // this.addChild(this._island);
             this.addChild(this._ship);
             this._bulletManager.AddBulletsToScene(this);
             for (var _i = 0, _a = this._meteor; _i < _a.length; _i++) {
-                var cloud = _a[_i];
-                this.addChild(cloud);
+                var meteor = _a[_i];
+                this.addChild(meteor);
             }
             this.addChild(this._scoreBoard.LivesLabel);
             this.addChild(this._scoreBoard.ScoreLabel);

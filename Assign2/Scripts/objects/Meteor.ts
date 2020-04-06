@@ -8,10 +8,15 @@ module objects
 
         // PUBLIC PROPERTIES
 
-        // CONSTRUCTOR
+        // CONSTRUCTOR;
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
+            const meteorType = Math.round(util.Mathf.RandomRange(1, 2));
+            if (meteorType === 1){
+                super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
+            } else {
+                super(config.Game.TEXTURE_ATLAS, "meteorSmall", new Vector2(), true);
+            }
 
             this.Start();
         }
@@ -29,13 +34,18 @@ module objects
         private _move():void
         {
             this.position = Vector2.add(this.position, this.velocity);
+            const rotatation = util.Mathf.RandomRange(-5, 5);
+            if (rotatation >= 0){
+                this.rotation += Math.round(rotatation);
+            } else {
+                this.rotation -= Math.round(rotatation);
+            }
         }
         
         // PUBLIC METHODS
         public Start(): void 
         {
             this.type = enums.GameObjectType.METEOR;
-            //this.alpha = 0.5; // 50% transparent
             this.Reset();
         }
         

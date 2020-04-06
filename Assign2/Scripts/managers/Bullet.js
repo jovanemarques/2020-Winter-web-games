@@ -24,6 +24,12 @@ var managers;
                 scene.addChild(bullet);
             });
         };
+        /**
+         * GetBulletPull
+         */
+        Bullet.prototype.GetBulletPull = function () {
+            return this._bulletPool;
+        };
         Bullet.prototype.GetBullet = function () {
             // remove the bullet from the front of the pool
             var bullet = this._bulletPool.shift();

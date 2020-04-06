@@ -17,9 +17,16 @@ var objects;
     var Meteor = /** @class */ (function (_super) {
         __extends(Meteor, _super);
         // PUBLIC PROPERTIES
-        // CONSTRUCTOR
+        // CONSTRUCTOR;
         function Meteor() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorBig", new objects.Vector2(), true) || this;
+            var _this = this;
+            var meteorType = Math.round(util.Mathf.RandomRange(1, 2));
+            if (meteorType === 1) {
+                _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorBig", new objects.Vector2(), true) || this;
+            }
+            else {
+                _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorSmall", new objects.Vector2(), true) || this;
+            }
             _this.Start();
             return _this;
         }
@@ -31,11 +38,17 @@ var objects;
         };
         Meteor.prototype._move = function () {
             this.position = objects.Vector2.add(this.position, this.velocity);
+            var rotatation = util.Mathf.RandomRange(-5, 5);
+            if (rotatation >= 0) {
+                this.rotation += Math.round(rotatation);
+            }
+            else {
+                this.rotation -= Math.round(rotatation);
+            }
         };
         // PUBLIC METHODS
         Meteor.prototype.Start = function () {
             this.type = enums.GameObjectType.METEOR;
-            //this.alpha = 0.5; // 50% transparent
             this.Reset();
         };
         Meteor.prototype.Update = function () {
