@@ -45,7 +45,6 @@ module managers
                     object2.isColliding = true;
                     return true;
                 }
-                
             }
             else
             {
@@ -67,7 +66,7 @@ module managers
         private static _collisionResponse(object1: objects.GameObject, object2: objects.GameObject) {
             if (object1.type === enums.GameObjectType.SHIP && object2.type === enums.GameObjectType.METEOR){
                 console.log("Collision with Meteor!");
-                let thunderSound = createjs.Sound.play("thunder");
+                let thunderSound = createjs.Sound.play("poin");
                 thunderSound.volume = 0.2;
                 config.Game.SCORE_BOARD.Lives -= 1;
                 // check if lives falls less than 1 and then switch to END scene

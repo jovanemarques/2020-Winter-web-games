@@ -30,8 +30,10 @@ var scenes;
             //instantiate a new Text object
             this._gameOverLabel = new objects.Label("Game Over", "80px", "Consolas", "#FFFF00", 320, 180, true);
             // buttons
-            this._restartButton = new objects.Button("enemyUFO", 320, 430, true);
+            this._restartButton = new objects.Button("player", 320, 430, true);
             this._space = new objects.Space();
+            var soundGameOver = createjs.Sound.play("game-over");
+            soundGameOver.volume = 0.3; // 30% volume
             this._scoreBoard = new managers.ScoreBoard();
             this._scoreBoard.HighScore = config.Game.HIGH_SCORE;
             this.Main();

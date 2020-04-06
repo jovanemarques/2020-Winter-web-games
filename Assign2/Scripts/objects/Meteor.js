@@ -19,14 +19,13 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTRUCTOR;
         function Meteor() {
-            var _this = this;
-            var meteorType = Math.round(util.Mathf.RandomRange(1, 2));
-            if (meteorType === 1) {
-                _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorBig", new objects.Vector2(), true) || this;
-            }
-            else {
-                _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorSmall", new objects.Vector2(), true) || this;
-            }
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "meteorBig", new objects.Vector2(), true) || this;
+            // const meteorType = Math.round(util.Mathf.RandomRange(1, 2));
+            // if (meteorType === 1){
+            //     super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
+            // } else {
+            //     super(config.Game.TEXTURE_ATLAS, "meteorSmall", new Vector2(), true);
+            // }
             _this.Start();
             return _this;
         }
@@ -62,6 +61,10 @@ var objects;
             var randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);
             var randomY = util.Mathf.RandomRange(-this.height * 3, -this.height);
             this.position = new objects.Vector2(randomX, randomY);
+        };
+        Meteor.prototype.Stop = function () {
+            this.velocity = new objects.Vector2(0, 0);
+            this.position = new objects.Vector2(-1000, -1000);
         };
         return Meteor;
     }(objects.GameObject));

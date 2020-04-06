@@ -65,9 +65,9 @@ var objects;
         Ship.prototype.Start = function () {
             this.type = enums.GameObjectType.SHIP;
             this._verticalPosition = 430; // locked to the bottom of the screen
-            this._engineSound = createjs.Sound.play("engine");
+            this._engineSound = createjs.Sound.play("theme");
             this._engineSound.loop = -1; // loop forever
-            this._engineSound.volume = 0.1; // 10% volume
+            this._engineSound.volume = 0.3; // 30% volume
             this._horizontalSpeed = 10;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, this._verticalPosition);
         };
@@ -77,6 +77,8 @@ var objects;
             // fire bullets every 10 frames
             if (createjs.Ticker.getTicks() % 10 == 0) {
                 if (config.Game.KEYBOARD_MANAGER.Fire) {
+                    this._fireSound = createjs.Sound.play("pew");
+                    this._fireSound.volume = 0.3; // 30% volume
                     this.FireBullets();
                 }
             }

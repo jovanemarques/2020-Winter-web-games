@@ -69,18 +69,31 @@ module scenes
 
         //    managers.Collision.AABBCheck(this._ship, this._island);
 
-           this._meteor.forEach(meteor => {
+            this._meteor.forEach(meteor => {
                meteor.Update();
-               managers.Collision.squaredRadiusCheck(this._ship, meteor);
+                if(createjs.Ticker.getTicks() % 10 == 0){
+                    managers.Collision.squaredRadiusCheck(this._ship, meteor);
                
-               managers.Collision.squaredRadiusCheck(this._ship, meteor);
-
-            //    const bulletPull = config.Game.BULLET_MANAGER.GetBulletPull();
-            //     bulletPull.forEach(bullet => {
-            //         bullet.Update();
-            //         managers.Collision.squaredRadiusCheck(bullet, meteor);
-            //     });
-           });
+                    const bulletPull = config.Game.BULLET_MANAGER.GetBulletPull();
+                    
+                    bulletPull.forEach(bullet => {
+                        bullet.Update();
+                        if (bullet.isActive){
+                            if (managers.Collision.squaredRadiusCheck(bullet, meteor)){
+                                if (meteor.currentAnimation == 'meteorBig'){
+                                    this.removeChild(meteor);
+                                    meteor.gotoAndStop('meteorSmall');
+                                    this.addChild(meteor);
+                                } else {
+                                    meteor.Stop();
+                                    this.removeChild(meteor);
+                                }
+                            } 
+                        } else {
+                        }
+                    });
+                }
+            });
         }
         
         public Main(): void 

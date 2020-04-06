@@ -23,6 +23,11 @@ let Game = (function(){
         {id:"engine", src:"./Assets/audio/engine.ogg"},
         {id:"yay", src:"./Assets/audio/yay.ogg"},
         {id:"thunder", src:"./Assets/audio/thunder.ogg"},
+        {id:"theme", src:"./Assets/audio/theme.ogg"},
+        {id:"pew", src:"./Assets/audio/pew.ogg"},
+        {id:"poin", src:"./Assets/audio/poin.ogg"},
+        {id:"game-over", src:"./Assets/audio/game-over.ogg"},
+        {id:"boom", src:"./Assets/audio/boom.ogg"},
     ];
 
     let spriteDataNew =

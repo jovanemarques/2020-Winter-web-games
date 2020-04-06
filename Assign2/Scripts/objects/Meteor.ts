@@ -11,12 +11,13 @@ module objects
         // CONSTRUCTOR;
         constructor()
         {
-            const meteorType = Math.round(util.Mathf.RandomRange(1, 2));
-            if (meteorType === 1){
-                super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
-            } else {
-                super(config.Game.TEXTURE_ATLAS, "meteorSmall", new Vector2(), true);
-            }
+            super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
+            // const meteorType = Math.round(util.Mathf.RandomRange(1, 2));
+            // if (meteorType === 1){
+            //     super(config.Game.TEXTURE_ATLAS, "meteorBig", new Vector2(), true);
+            // } else {
+            //     super(config.Game.TEXTURE_ATLAS, "meteorSmall", new Vector2(), true);
+            // }
 
             this.Start();
         }
@@ -63,6 +64,11 @@ module objects
             let randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);
             let randomY = util.Mathf.RandomRange(-this.height * 3, -this.height);
             this.position = new Vector2(randomX, randomY);
+        }
+        public Stop(): void 
+        {
+            this.velocity = new Vector2(0, 0);
+            this.position = new Vector2(-1000, -1000);
         }
 
         

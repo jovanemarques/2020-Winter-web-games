@@ -5,6 +5,7 @@ module objects
         // PRIVATE INSTANCE MEMBERS
         private _verticalPosition:number;
         private _engineSound : createjs.AbstractSoundInstance;
+        private _fireSound : createjs.AbstractSoundInstance;
         private _bulletSpawn: objects.Vector2;
         private _horizontalSpeed: number;
         
@@ -69,9 +70,9 @@ module objects
         {
             this.type = enums.GameObjectType.SHIP;
             this._verticalPosition = 430; // locked to the bottom of the screen
-            this._engineSound = createjs.Sound.play("engine");
+            this._engineSound = createjs.Sound.play("theme");
             this._engineSound.loop = -1; // loop forever
-            this._engineSound.volume = 0.1; // 10% volume
+            this._engineSound.volume = 0.3; // 30% volume
             this._horizontalSpeed = 10;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, this._verticalPosition);
         }
@@ -86,6 +87,8 @@ module objects
             {
                 if(config.Game.KEYBOARD_MANAGER.Fire)
                 {
+                    this._fireSound = createjs.Sound.play("pew");
+                    this._fireSound.volume = 0.3; // 30% volume
                     this.FireBullets();
                 }
             }
@@ -102,8 +105,6 @@ module objects
             let bullet = config.Game.BULLET_MANAGER.GetBullet();
             bullet.position = this._bulletSpawn;
         }
-
-        
     }
 
 }
