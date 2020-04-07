@@ -1,4 +1,11 @@
 "use strict";
+/**
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Vector 2 points object
+ *
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 var objects;
 (function (objects) {
     var Vector2 = /** @class */ (function () {

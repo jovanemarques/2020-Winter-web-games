@@ -12,6 +12,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/**
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Boss object
+ *
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 var objects;
 (function (objects) {
     var Boss = /** @class */ (function (_super) {

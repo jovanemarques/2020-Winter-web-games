@@ -6,6 +6,7 @@ module scenes
         START,
         PLAY,
         END,
+        INFO,
         NUM_OF_SCENES
     }
 }

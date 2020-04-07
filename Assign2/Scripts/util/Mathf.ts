@@ -1,3 +1,10 @@
+/** 
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Math class
+ * 
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 module util
 {
     export class Mathf

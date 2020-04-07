@@ -1,3 +1,10 @@
+/** 
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Meteor object
+ * 
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 module objects
 {
     export class Meteor extends GameObject

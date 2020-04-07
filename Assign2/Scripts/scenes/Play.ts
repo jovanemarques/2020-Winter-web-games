@@ -1,3 +1,10 @@
+/** 
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Play Scene
+ * 
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 module scenes
 {
     export class Play extends objects.Scene

@@ -1,4 +1,11 @@
 "use strict";
+/**
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Keyboard manager
+ *
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 var managers;
 (function (managers) {
     var Keyboard = /** @class */ (function () {

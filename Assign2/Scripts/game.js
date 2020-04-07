@@ -1,4 +1,11 @@
 "use strict";
+/**
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Main file of the Space Battle Game
+ *
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 //IIFE - Immediately Invoked Function Expression
 //means -> self-executing anonymous function
 var Game = (function () {
@@ -119,6 +126,10 @@ var Game = (function () {
             case scenes.State.START:
                 console.log("switch to Start Scene");
                 currentScene = new scenes.Start();
+                break;
+            case scenes.State.INFO:
+                console.log("switch to Info Scene");
+                currentScene = new scenes.Info();
                 break;
             case scenes.State.PLAY:
                 console.log("switch to Play Scene");

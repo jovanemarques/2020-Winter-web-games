@@ -15,47 +15,47 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * Author:      Jovane Marques - 300982100
  * Create at:   Apr 04th, 2020
- * Description: Start Scene
+ * Description: Info Scene
  *
  * Revisions:   Apr 04th, 2020 - Creation
 */
 var scenes;
 (function (scenes) {
-    var Start = /** @class */ (function (_super) {
-        __extends(Start, _super);
+    var Info = /** @class */ (function (_super) {
+        __extends(Info, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Start() {
+        function Info() {
             var _this = _super.call(this) || this;
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
         // PUBLIC METHODS
-        Start.prototype.Start = function () {
+        Info.prototype.Start = function () {
             //instantiate a new Text object
-            this._welcomeLabel = new objects.Label("Space Battle", "80px", "Consolas", "#FFFFFF", 320, 180, true);
+            this._welcomeLabel = new objects.Label("Instructions:\n    - Avoid the meteors to not lose lifes\n    - Press [ESPACE] to shot\n    - Hitting a big meteor will broke it into a small one\n    - Hitting a small will destry it and give 100 points \n            ", "25px", "Consolas", "#FFFFFF", 320, 180, true);
             // buttons
             this._startButton = new objects.Button("player", 320, 430, true);
             this._space = new objects.Space();
             this.Main();
         };
-        Start.prototype.Update = function () {
+        Info.prototype.Update = function () {
             this._space.Update();
         };
-        Start.prototype.Main = function () {
+        Info.prototype.Main = function () {
             this.addChild(this._space);
             this.addChild(this._welcomeLabel);
             this.addChild(this._startButton);
             this._startButton.on("click", function () {
-                config.Game.SCENE = scenes.State.INFO;
+                config.Game.SCENE = scenes.State.PLAY;
             });
         };
-        Start.prototype.Clean = function () {
+        Info.prototype.Clean = function () {
             this.removeAllChildren();
         };
-        return Start;
+        return Info;
     }(objects.Scene));
-    scenes.Start = Start;
+    scenes.Info = Info;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=Start.js.map
+//# sourceMappingURL=Info.js.map

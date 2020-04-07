@@ -1,3 +1,10 @@
+/** 
+ * Author:      Jovane Marques - 300982100
+ * Create at:   Apr 04th, 2020
+ * Description: Boss object
+ * 
+ * Revisions:   Apr 04th, 2020 - Creation
+*/
 module objects
 {
     export class Boss extends GameObject
