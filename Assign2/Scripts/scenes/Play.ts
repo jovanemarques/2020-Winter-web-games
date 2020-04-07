@@ -100,6 +100,7 @@ module scenes
                 if (!this._boss.isActive){
                     this._boss.isActive = true;
                     this.addChild(this._boss);
+                    this._space.VerticalSpeed = 10;
                 }
             }
             

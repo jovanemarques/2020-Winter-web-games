@@ -23,7 +23,13 @@ module objects
             {
                 this.Reset();
             }
-        }       
+        }      
+
+        public set VerticalSpeed(v : number) {
+            this._verticalSpeed = v;
+            this.velocity = new Vector2(0, this._verticalSpeed);
+        }
+        
         
         private _move():void
         {

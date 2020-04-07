@@ -51,6 +51,7 @@ var scenes;
                 config.Game.SCENE = scenes.State.PLAY;
             });
             this.addChild(this._scoreBoard.highScoreLabel);
+            this.addChild(this._scoreBoard.ScoreLabel);
         };
         End.prototype.Clean = function () {
             this.removeAllChildren();

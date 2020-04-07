@@ -29,6 +29,14 @@ var objects;
                 this.Reset();
             }
         };
+        Object.defineProperty(Space.prototype, "VerticalSpeed", {
+            set: function (v) {
+                this._verticalSpeed = v;
+                this.velocity = new objects.Vector2(0, this._verticalSpeed);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Space.prototype._move = function () {
             this.position = objects.Vector2.add(this.position, this.velocity);
         };

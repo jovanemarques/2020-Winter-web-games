@@ -62,6 +62,7 @@ module scenes
             });
 
             this.addChild(this._scoreBoard.highScoreLabel);
+            this.addChild(this._scoreBoard.ScoreLabel);
 
         }
 

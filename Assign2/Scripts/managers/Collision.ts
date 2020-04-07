@@ -63,7 +63,7 @@ module managers
          */
         private static _collisionResponse(object1: objects.GameObject, object2: objects.GameObject) {
             if (object1.type === enums.GameObjectType.SHIP && object2.type === enums.GameObjectType.METEOR){
-                console.log("Collision with Meteor!");
+                // console.log("Collision with Meteor!");
                 let thunderSound = createjs.Sound.play("poin");
                 thunderSound.volume = 0.2;
                 config.Game.SCORE_BOARD.Lives -= 1;
@@ -75,7 +75,7 @@ module managers
             } else if (object1.type === enums.GameObjectType.BULLET && object2.type === enums.GameObjectType.METEOR){
 
                 if (object1.isActive){
-                    console.log("Collision with Meteor >> Bullet!");
+                    // console.log("Collision with Meteor >> Bullet!");
                     let thunderSound = createjs.Sound.play("thunder");
                     config.Game.SCORE_BOARD.Score += 100;
                     if (config.Game.SCORE > config.Game.HIGH_SCORE) {
